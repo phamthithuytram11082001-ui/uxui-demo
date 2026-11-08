@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechStore - 3 Screens Mockup</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-hover: #1d4ed8;
+            --bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --success: #16a34a;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Top Header */
+        header {
+            background: #ffffff;
+            border-bottom: 1px solid var(--border);
+            padding: 16px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .brand {
+            font-weight: 800;
+            font-size: 20px;
+            color: var(--primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Screen Switcher Navigation Bar */
+        .mockup-nav {
+            display: flex;
+            background: #f1f5f9;
+            padding: 4px;
+            border-radius: 8px;
+            gap: 4px;
+        }
+
+        .nav-btn {
+            border: none;
+            background: transparent;
+            padding: 8px 16px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-muted);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .nav-btn.active {
+            background: #ffffff;
+            color: var(--primary);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .cart-icon-btn {
+            position: relative;
+            background: none;
+            border: 1px solid var(--border);
+            padding: 8px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .cart-badge {
+            background: var(--primary);
+            color: white;
+            font-size: 11px;
+            border-radius: 50%;
+            padding: 2px 6px;
+        }
+
+        /* Main Container */
+        main {
+            max-width: 1080px;
+            width: 100%;
+            margin: 24px auto;
+            padding: 0 20px;
+            flex: 1;
+        }
+
+        .screen {
+            display: none;
+            animation: fadeIn 0.25s ease-in-out;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Screen 1: Product List */
+        .banner {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            padding: 32px;
+            border-radius: 16px;
+            margin-bottom: 24px;
+        }
+
+        .banner h1 { font-size: 26px; margin-bottom: 8px; }
+        .banner p { opacity: 0.9; font-size: 15px; }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 20px;
+        }
+
+        .product-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
+        }
+
+        .product-img {
+            height: 180px;
+            background: #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+        }
+
+        .product-info {
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .product-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .product-price {
+            font-size: 16px;
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .btn-view {
+            margin-top: auto;
+            background: #eff6ff;
+            color: var(--primary);
+            border: none;
+            padding: 10px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* Screen 2: Product Detail */
+        .detail-wrapper {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 40px;
+        }
+
+        .detail-img {
+            background: #f1f5f9;
+            border-radius: 12px;
+            min-height: 320px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+        }
+
+        .back-btn {
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            margin-bottom: 16px;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .badge-stock {
+            display: inline-block;
+            background: #dcfce7;
+            color: var(--success);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+            font-size: 15px;
+        }
+
+        .btn-primary:hover { background: var(--primary-hover); }
+
+        /* Screen 3: Cart & Checkout */
+        .checkout-layout {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 24px;
+        }
+
+        .box {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+        }
+
+        .cart-row {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .cart-row:last-child { border-bottom: none; }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+
+        .summary-row.total {
+            border-top: 1px solid var(--border);
+            padding-top: 14px;
+            font-weight: 800;
+            font-size: 18px;
+            color: var(--primary);
+        }
+
+        .form-group {
+            margin-bottom: 14px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 6px;
+            color: var(--text-muted);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header & Interactive Navigator -->
+    <header>
+        <div class="brand" onclick="showScreen('screen-list')">
+            🛒 <span>TechMockup</span>
+        </div>
+
+        <nav class="mockup-nav">
+            <button class="nav-btn active" id="btn-screen-list" onclick="showScreen('screen-list')">1. Trang Sản Phẩm</button>
+            <button class="nav-btn" id="btn-screen-detail" onclick="showScreen('screen-detail')">2. Chi Tiết Sản Phẩm</button>
+            <button class="nav-btn" id="btn-screen-cart" onclick="showScreen('screen-cart')">3. Giỏ Hàng & Thanh Toán</button>
+        </nav>
+
+        <button class="cart-icon-btn" onclick="showScreen('screen-cart')">
+            🛒 Giỏ hàng <span class="cart-badge" id="cart-count">1</span>
+        </button>
+    </header>
+
+    <main>
+        <!-- SCREEN 1: PRODUCT LISTING -->
+        <section id="screen-list" class="screen active">
+            <div class="banner">
+                <h1>Màn hình 1: Danh Sách Sản Phẩm</h1>
+                <p>Mẫu Mockup Wireframe giao diện E-Commerce trực quan cho BA & UX/UI Review.</p>
+            </div>
+
+            <div class="product-grid">
+                <div class="product-card" onclick="showDetail('Laptop Pro 14 inch', '28.990.000 ₫', '💻', 'Hiệu năng cao cho lập trình viên và phân tích dữ liệu.')">
+                    <div class="product-img">💻</div>
+                    <div class="product-info">
+                        <div class="product-title">Laptop Pro 14 inch</div>
+                        <div class="product-price">28.990.000 ₫</div>
+                        <button class="btn-view">Xem chi tiết</button>
+                    </div>
+                </div>
+
+                <div class="product-card" onclick="showDetail('Tai nghe Chống ồn Pro', '4.290.000 ₫', '🎧', 'Khử tiếng ồn chủ động ANC, pin dùng liên tục 30 giờ.')">
+                    <div class="product-img">🎧</div>
+                    <div class="product-info">
+                        <div class="product-title">Tai nghe Chống ồn Pro</div>
+                        <div class="product-price">4.290.000 ₫</div>
+                        <button class="btn-view">Xem chi tiết</button>
+                    </div>
+                </div>
+
+                <div class="product-card" onclick="showDetail('Bàn phím cơ Bluetooth', '1.850.000 ₫', '⌨️', 'Switch quang học gõ cực êm, kết nối cùng lúc 3 thiết bị.')">
+                    <div class="product-img">⌨️</div>
+                    <div class="product-info">
+                        <div class="product-title">Bàn phím cơ Bluetooth</div>
+                        <div class="product-price">1.850.000 ₫</div>
+                        <button class="btn-view">Xem chi tiết</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SCREEN 2: PRODUCT DETAIL -->
+        <section id="screen-detail" class="screen">
+            <button class="back-btn" onclick="showScreen('screen-list')">← Quay lại danh sách sản phẩm</button>
+            <div class="detail-wrapper">
+                <div class="detail-img" id="detail-icon">💻</div>
+                <div>
+                    <span class="badge-stock">Màn hình 2: Chi Tiết Sản Phẩm</span>
+                    <h1 id="detail-title" style="margin-bottom: 8px;">Laptop Pro 14 inch</h1>
+                    <div id="detail-price" style="font-size: 24px; color: var(--primary); font-weight: 800; margin-bottom: 16px;">28.990.000 ₫</div>
+                    <p id="detail-desc" style="color: var(--text-muted); line-height: 1.6; margin-bottom: 24px;">
+                        Mô hình thông số kỹ thuật, hình ảnh minh họa sản phẩm và chính sách bảo hành chính hãng.
+                    </p>
+
+                    <div style="display: flex; gap: 12px; margin-bottom: 20px;">
+                        <button style="padding: 10px 16px; border: 1px solid var(--border); border-radius: 8px; background: white; font-weight: 600;">Bản Tiêu chuẩn</button>
+                        <button style="padding: 10px 16px; border: 1px solid var(--primary); border-radius: 8px; background: #eff6ff; color: var(--primary); font-weight: 600;">Bản Nâng cao</button>
+                    </div>
+
+                    <button class="btn-primary" onclick="showScreen('screen-cart')">Thêm vào giỏ & Đến màn hình thanh toán →</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SCREEN 3: CART & CHECKOUT -->
+        <section id="screen-cart" class="screen">
+            <h2 style="margin-bottom: 20px;">Màn hình 3: Giỏ Hàng & Đặt Hàng</h2>
+            <div class="checkout-layout">
+                <div class="box">
+                    <h3 style="margin-bottom: 16px;">Sản phẩm trong giỏ</h3>
+                    <div class="cart-row">
+                        <div style="font-size: 32px; background: #f1f5f9; padding: 12px; border-radius: 8px;">💻</div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 700;">Laptop Pro 14 inch</div>
+                            <div style="color: var(--text-muted); font-size: 13px;">Bản Nâng cao - Màu Xám</div>
+                        </div>
+                        <div style="font-weight: 700; color: var(--primary);">28.990.000 ₫</div>
+                    </div>
+
+                    <h3 style="margin: 24px 0 16px 0;">Thông tin giao hàng</h3>
+                    <div class="form-group">
+                        <label>Họ và tên người nhận</label>
+                        <input type="text" value="Phạm Thị Thùy Trâm" placeholder="Nhập tên">
+                    </div>
+                    <div class="form-group">
+                        <label>Địa chỉ nhận hàng</label>
+                        <input type="text" value="Đà Nẵng, Việt Nam" placeholder="Nhập địa chỉ">
+                    </div>
+                </div>
+
+                <div class="box">
+                    <h3 style="margin-bottom: 16px;">Tóm tắt đơn hàng</h3>
+                    <div class="summary-row">
+                        <span>Tạm tính</span>
+                        <span>28.990.000 ₫</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Phí vận chuyển</span>
+                        <span>Miễn phí</span>
+                    </div>
+                    <div class="summary-row total">
+                        <span>Tổng thanh toán</span>
+                        <span>28.990.000 ₫</span>
+                    </div>
+
+                    <button class="btn-primary" onclick="alert('🎉 Đặt hàng thành công! Đã hoàn tất luồng Mockup 3 màn hình.')">Xác nhận thanh toán</button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        function showScreen(screenId) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+
+            document.getElementById(screenId).classList.add('active');
+            const navBtn = document.getElementById('btn-' + screenId);
+            if (navBtn) navBtn.classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showDetail(title, price, icon, desc) {
+            document.getElementById('detail-title').innerText = title;
+            document.getElementById('detail-price').innerText = price;
+            document.getElementById('detail-icon').innerText = icon;
+            document.getElementById('detail-desc').innerText = desc;
+            showScreen('screen-detail');
+        }
+    </script>
+</body>
+</html>
