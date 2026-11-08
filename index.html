@@ -3,466 +3,813 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechStore - 3 Screens Mockup</title>
+    <title>AuraTech - Modern Store Mockup</title>
+    <!-- Google Font Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #2563eb;
-            --primary-hover: #1d4ed8;
-            --bg: #f8fafc;
-            --card-bg: #ffffff;
-            --text-main: #0f172a;
-            --text-muted: #64748b;
-            --border: #e2e8f0;
-            --success: #16a34a;
+            --brand: #4f46e5;
+            --brand-hover: #4338ca;
+            --brand-light: #eef2ff;
+            --surface: #ffffff;
+            --bg-subtle: #f8fafc;
+            --border-soft: #e2e8f0;
+            --text-heading: #0f172a;
+            --text-body: #475569;
+            --text-muted: #94a3b8;
+            --success: #10b981;
+            --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.05);
+            --shadow-md: 0 4px 12px -2px rgba(15, 23, 42, 0.08);
+            --shadow-lg: 0 16px 32px -8px rgba(15, 23, 42, 0.12);
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            -webkit-font-smoothing: antialiased;
         }
 
         body {
-            background-color: var(--bg);
-            color: var(--text-main);
+            background-color: var(--bg-subtle);
+            color: var(--text-body);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
         }
 
-        /* Top Header */
+        /* Top Navigation Header */
         header {
-            background: #ffffff;
-            border-bottom: 1px solid var(--border);
-            padding: 16px 24px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border-soft);
+            padding: 14px 28px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             position: sticky;
             top: 0;
-            z-index: 50;
+            z-index: 60;
         }
 
-        .brand {
+        .logo {
+            font-size: 19px;
             font-weight: 800;
-            font-size: 20px;
-            color: var(--primary);
+            color: var(--text-heading);
+            letter-spacing: -0.5px;
             cursor: pointer;
             display: flex;
             align-items: center;
             gap: 8px;
         }
 
-        /* Screen Switcher Navigation Bar */
-        .mockup-nav {
+        .logo-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--brand);
+            box-shadow: 0 0 10px rgba(79, 70, 229, 0.6);
+        }
+
+        /* Prototype Flow Navigation */
+        .stage-switcher {
             display: flex;
             background: #f1f5f9;
             padding: 4px;
-            border-radius: 8px;
-            gap: 4px;
+            border-radius: 10px;
+            gap: 3px;
         }
 
-        .nav-btn {
+        .stage-btn {
             border: none;
             background: transparent;
             padding: 8px 16px;
             font-size: 13px;
             font-weight: 600;
-            color: var(--text-muted);
-            border-radius: 6px;
+            color: var(--text-body);
+            border-radius: 7px;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.2s ease;
         }
 
-        .nav-btn.active {
-            background: #ffffff;
-            color: var(--primary);
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        .stage-btn.active {
+            background: var(--surface);
+            color: var(--brand);
+            box-shadow: var(--shadow-sm);
         }
 
-        .cart-icon-btn {
-            position: relative;
-            background: none;
-            border: 1px solid var(--border);
-            padding: 8px 14px;
-            border-radius: 8px;
+        .cart-trigger {
+            background: var(--surface);
+            border: 1px solid var(--border-soft);
+            padding: 8px 16px;
+            border-radius: 10px;
             cursor: pointer;
             font-weight: 600;
+            font-size: 13px;
+            color: var(--text-heading);
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
+            transition: border-color 0.2s, box-shadow 0.2s;
         }
 
-        .cart-badge {
-            background: var(--primary);
+        .cart-trigger:hover {
+            border-color: var(--brand);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .cart-count-badge {
+            background: var(--brand);
             color: white;
             font-size: 11px;
-            border-radius: 50%;
-            padding: 2px 6px;
+            font-weight: 700;
+            border-radius: 12px;
+            padding: 2px 7px;
         }
 
-        /* Main Container */
+        /* Screen Transitions */
         main {
-            max-width: 1080px;
+            max-width: 1180px;
             width: 100%;
-            margin: 24px auto;
-            padding: 0 20px;
+            margin: 28px auto 40px;
+            padding: 0 24px;
             flex: 1;
         }
 
         .screen {
             display: none;
-            animation: fadeIn 0.25s ease-in-out;
+            animation: modernFade 0.25s ease-out;
         }
 
         .screen.active {
             display: block;
         }
 
-        @keyframes fadeIn {
+        @keyframes modernFade {
             from { opacity: 0; transform: translateY(6px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Screen 1: Product List */
-        .banner {
-            background: linear-gradient(135deg, #2563eb, #1e40af);
+        /* Hero Banner */
+        .hero {
+            background: linear-gradient(135deg, #1e1b4b 0%, #312e81 60%, #4338ca 100%);
             color: white;
-            padding: 32px;
-            border-radius: 16px;
+            padding: 40px 36px;
+            border-radius: 20px;
+            margin-bottom: 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 10px 25px -5px rgba(49, 46, 129, 0.25);
+        }
+
+        .hero h1 {
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+        }
+
+        .hero p {
+            color: #c7d2fe;
+            font-size: 14px;
+            max-width: 520px;
+            line-height: 1.5;
+        }
+
+        .category-tabs {
+            display: flex;
+            gap: 8px;
             margin-bottom: 24px;
+            overflow-x: auto;
+            padding-bottom: 4px;
         }
 
-        .banner h1 { font-size: 26px; margin-bottom: 8px; }
-        .banner p { opacity: 0.9; font-size: 15px; }
+        .cat-chip {
+            border: 1px solid var(--border-soft);
+            background: var(--surface);
+            padding: 8px 16px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-body);
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
 
-        .product-grid {
+        .cat-chip.active, .cat-chip:hover {
+            border-color: var(--brand);
+            background: var(--brand-light);
+            color: var(--brand);
+        }
+
+        /* Products Grid */
+        .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 22px;
         }
 
-        .product-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 12px;
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border-soft);
+            border-radius: 16px;
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
             cursor: pointer;
         }
 
-        .product-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-color: #cbd5e1;
         }
 
-        .product-img {
-            height: 180px;
-            background: #e2e8f0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 40px;
+        .card-visual {
+            width: 100%;
+            height: 220px;
+            background: #ffffff;
+            overflow: hidden;
+            position: relative;
+            border-bottom: 1px solid #f1f5f9;
         }
 
-        .product-info {
-            padding: 16px;
+        .card-visual img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .card:hover .card-visual img {
+            transform: scale(1.06);
+        }
+
+        .tag-pill {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(8px);
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 20px;
+            color: var(--text-heading);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+
+        .card-content {
+            padding: 18px;
             display: flex;
             flex-direction: column;
             flex: 1;
         }
 
-        .product-title {
-            font-size: 16px;
+        .card-name {
+            font-size: 15px;
             font-weight: 700;
+            color: var(--text-heading);
             margin-bottom: 6px;
+            line-height: 1.35;
         }
 
-        .product-price {
-            font-size: 16px;
-            color: var(--primary);
-            font-weight: 700;
-            margin-bottom: 12px;
+        .card-snippet {
+            font-size: 12.5px;
+            color: var(--text-muted);
+            margin-bottom: 14px;
+            line-height: 1.45;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
 
-        .btn-view {
+        .card-footer {
             margin-top: auto;
-            background: #eff6ff;
-            color: var(--primary);
-            border: none;
-            padding: 10px;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        /* Screen 2: Product Detail */
-        .detail-wrapper {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 32px;
-            display: grid;
-            grid-template-columns: 1fr 1.2fr;
-            gap: 40px;
-        }
-
-        .detail-img {
-            background: #f1f5f9;
-            border-radius: 12px;
-            min-height: 320px;
             display: flex;
+            justify-content: space-between;
             align-items: center;
-            justify-content: center;
-            font-size: 80px;
         }
 
-        .back-btn {
+        .card-price {
+            font-size: 16px;
+            font-weight: 800;
+            color: var(--brand);
+            letter-spacing: -0.3px;
+        }
+
+        .btn-view-spec {
+            background: var(--brand-light);
+            color: var(--brand);
+            border: none;
+            padding: 7px 13px;
+            border-radius: 8px;
+            font-size: 12.5px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+
+        .btn-view-spec:hover {
+            background: #e0e7ff;
+        }
+
+        /* Screen 2: Detailed View */
+        .detail-panel {
+            background: var(--surface);
+            border: 1px solid var(--border-soft);
+            border-radius: 20px;
+            padding: 40px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .detail-hero-box {
+            width: 100%;
+            height: 420px;
+            background: #f8fafc;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border-soft);
+        }
+
+        .detail-hero-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .btn-back-link {
             background: none;
             border: none;
-            color: var(--text-muted);
-            cursor: pointer;
-            margin-bottom: 16px;
+            color: var(--text-body);
+            font-size: 13px;
             font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 20px;
             display: inline-flex;
             align-items: center;
-            gap: 4px;
+            gap: 6px;
         }
 
-        .badge-stock {
+        .btn-back-link:hover { color: var(--brand); }
+
+        .detail-badge {
             display: inline-block;
-            background: #dcfce7;
+            background: #ecfdf5;
             color: var(--success);
-            padding: 4px 10px;
+            padding: 4px 12px;
             border-radius: 20px;
             font-size: 12px;
             font-weight: 700;
             margin-bottom: 12px;
         }
 
-        .btn-primary {
-            background: var(--primary);
+        .detail-headline {
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--text-heading);
+            letter-spacing: -0.5px;
+            margin-bottom: 10px;
+        }
+
+        .detail-cost {
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--brand);
+            margin-bottom: 20px;
+        }
+
+        .detail-text {
+            color: var(--text-body);
+            font-size: 14.5px;
+            line-height: 1.65;
+            margin-bottom: 28px;
+        }
+
+        .spec-list {
+            background: var(--bg-subtle);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 28px;
+            font-size: 13px;
+        }
+
+        .spec-list li {
+            list-style: none;
+            margin-bottom: 8px;
+            color: var(--text-body);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .spec-list li:last-child { margin-bottom: 0; }
+
+        .btn-action-primary {
+            background: var(--brand);
             color: white;
             border: none;
-            padding: 12px 24px;
-            border-radius: 8px;
+            padding: 14px 24px;
+            border-radius: 10px;
+            font-size: 15px;
             font-weight: 700;
             cursor: pointer;
             width: 100%;
-            margin-top: 20px;
-            font-size: 15px;
+            transition: background 0.2s, transform 0.1s;
         }
 
-        .btn-primary:hover { background: var(--primary-hover); }
+        .btn-action-primary:hover {
+            background: var(--brand-hover);
+        }
 
-        /* Screen 3: Cart & Checkout */
-        .checkout-layout {
+        /* Screen 3: Cart / Checkout */
+        .checkout-grid {
             display: grid;
-            grid-template-columns: 1.5fr 1fr;
-            gap: 24px;
+            grid-template-columns: 1.6fr 1fr;
+            gap: 28px;
         }
 
-        .box {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
+        .checkout-box {
+            background: var(--surface);
+            border: 1px solid var(--border-soft);
             border-radius: 16px;
-            padding: 24px;
+            padding: 28px;
+            box-shadow: var(--shadow-sm);
         }
 
-        .cart-row {
+        .section-header {
+            font-size: 16px;
+            font-weight: 800;
+            color: var(--text-heading);
+            margin-bottom: 18px;
+        }
+
+        .order-item-row {
             display: flex;
             align-items: center;
             gap: 16px;
             padding: 16px 0;
-            border-bottom: 1px solid var(--border);
+            border-bottom: 1px solid var(--border-soft);
         }
 
-        .cart-row:last-child { border-bottom: none; }
-
-        .summary-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 12px;
-            font-size: 14px;
+        .item-thumb-box {
+            width: 72px;
+            height: 72px;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--border-soft);
+            flex-shrink: 0;
         }
 
-        .summary-row.total {
-            border-top: 1px solid var(--border);
-            padding-top: 14px;
-            font-weight: 800;
-            font-size: 18px;
-            color: var(--primary);
+        .item-thumb-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
-        .form-group {
+        .form-field {
             margin-bottom: 14px;
         }
 
-        .form-group label {
+        .form-field label {
             display: block;
-            font-size: 13px;
+            font-size: 12.5px;
             font-weight: 600;
+            color: var(--text-body);
             margin-bottom: 6px;
-            color: var(--text-muted);
         }
 
-        .form-group input {
+        .form-field input {
             width: 100%;
-            padding: 10px 12px;
-            border: 1px solid var(--border);
+            padding: 11px 14px;
+            border: 1px solid var(--border-soft);
             border-radius: 8px;
-            font-size: 14px;
+            font-size: 13.5px;
+            color: var(--text-heading);
+            background: #ffffff;
+            outline: none;
+        }
+
+        .form-field input:focus {
+            border-color: var(--brand);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
+        }
+
+        .receipt-line {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13.5px;
+            margin-bottom: 12px;
+            color: var(--text-body);
+        }
+
+        .receipt-total {
+            border-top: 1px solid var(--border-soft);
+            padding-top: 16px;
+            margin-top: 8px;
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--brand);
         }
     </style>
 </head>
 <body>
 
-    <!-- Header & Interactive Navigator -->
+    <!-- Header Navigation -->
     <header>
-        <div class="brand" onclick="showScreen('screen-list')">
-            🛒 <span>TechMockup</span>
+        <div class="logo" onclick="switchStage('screen-catalog')">
+            <div class="logo-dot"></div>
+            <span>AuraTech</span>
         </div>
 
-        <nav class="mockup-nav">
-            <button class="nav-btn active" id="btn-screen-list" onclick="showScreen('screen-list')">1. Trang Sản Phẩm</button>
-            <button class="nav-btn" id="btn-screen-detail" onclick="showScreen('screen-detail')">2. Chi Tiết Sản Phẩm</button>
-            <button class="nav-btn" id="btn-screen-cart" onclick="showScreen('screen-cart')">3. Giỏ Hàng & Thanh Toán</button>
+        <nav class="stage-switcher">
+            <button class="stage-btn active" id="tab-catalog" onclick="switchStage('screen-catalog')">1. Catalog</button>
+            <button class="stage-btn" id="tab-detail" onclick="switchStage('screen-detail')">2. Product Detail</button>
+            <button class="stage-btn" id="tab-checkout" onclick="switchStage('screen-checkout')">3. Checkout</button>
         </nav>
 
-        <button class="cart-icon-btn" onclick="showScreen('screen-cart')">
-            🛒 Giỏ hàng <span class="cart-badge" id="cart-count">1</span>
+        <button class="cart-trigger" onclick="switchStage('screen-checkout')">
+            <span>Bag</span>
+            <span class="cart-count-badge" id="bag-count">1</span>
         </button>
     </header>
 
     <main>
-        <!-- SCREEN 1: PRODUCT LISTING -->
-        <section id="screen-list" class="screen active">
-            <div class="banner">
-                <h1>Màn hình 1: Danh Sách Sản Phẩm</h1>
-                <p>Mẫu Mockup Wireframe giao diện E-Commerce trực quan cho BA & UX/UI Review.</p>
+        <!-- SCREEN 1: CATALOG -->
+        <section id="screen-catalog" class="screen active">
+            <div class="hero">
+                <div>
+                    <h1>Flagship Hardware Showcase</h1>
+                    <p>Bộ mockup tương tác 3 màn hình phục vụ đánh giá luồng người dùng (User Journey) và tiêu chuẩn giao diện UI/UX cho ứng dụng Thương mại Điện tử.</p>
+                </div>
             </div>
 
-            <div class="product-grid">
-                <div class="product-card" onclick="showDetail('Laptop Pro 14 inch', '28.990.000 ₫', '💻', 'Hiệu năng cao cho lập trình viên và phân tích dữ liệu.')">
-                    <div class="product-img">💻</div>
-                    <div class="product-info">
-                        <div class="product-title">Laptop Pro 14 inch</div>
-                        <div class="product-price">28.990.000 ₫</div>
-                        <button class="btn-view">Xem chi tiết</button>
-                    </div>
-                </div>
+            <!-- Category Filter Chips -->
+            <div class="category-tabs">
+                <button class="cat-chip active" onclick="filterItems('all')">Tất cả sản phẩm (8)</button>
+                <button class="cat-chip" onclick="filterItems('laptop')">Laptops & Tablet</button>
+                <button class="cat-chip" onclick="filterItems('audio')">Audio & Headphone</button>
+                <button class="cat-chip" onclick="filterItems('gear')">Bàn phím & Chuột</button>
+                <button class="cat-chip" onclick="filterItems('wearable')">Đồng hồ thông minh</button>
+            </div>
 
-                <div class="product-card" onclick="showDetail('Tai nghe Chống ồn Pro', '4.290.000 ₫', '🎧', 'Khử tiếng ồn chủ động ANC, pin dùng liên tục 30 giờ.')">
-                    <div class="product-img">🎧</div>
-                    <div class="product-info">
-                        <div class="product-title">Tai nghe Chống ồn Pro</div>
-                        <div class="product-price">4.290.000 ₫</div>
-                        <button class="btn-view">Xem chi tiết</button>
-                    </div>
-                </div>
-
-                <div class="product-card" onclick="showDetail('Bàn phím cơ Bluetooth', '1.850.000 ₫', '⌨️', 'Switch quang học gõ cực êm, kết nối cùng lúc 3 thiết bị.')">
-                    <div class="product-img">⌨️</div>
-                    <div class="product-info">
-                        <div class="product-title">Bàn phím cơ Bluetooth</div>
-                        <div class="product-price">1.850.000 ₫</div>
-                        <button class="btn-view">Xem chi tiết</button>
-                    </div>
-                </div>
+            <!-- Products Grid with 8 Real Products -->
+            <div class="products-grid" id="grid-container">
+                <!-- Data populated dynamically by JavaScript -->
             </div>
         </section>
 
         <!-- SCREEN 2: PRODUCT DETAIL -->
         <section id="screen-detail" class="screen">
-            <button class="back-btn" onclick="showScreen('screen-list')">← Quay lại danh sách sản phẩm</button>
-            <div class="detail-wrapper">
-                <div class="detail-img" id="detail-icon">💻</div>
+            <button class="btn-back-link" onclick="switchStage('screen-catalog')">← Quay lại danh mục sản phẩm</button>
+            
+            <div class="detail-panel">
+                <div class="detail-hero-box">
+                    <img id="detail-img" src="" alt="Detail image">
+                </div>
                 <div>
-                    <span class="badge-stock">Màn hình 2: Chi Tiết Sản Phẩm</span>
-                    <h1 id="detail-title" style="margin-bottom: 8px;">Laptop Pro 14 inch</h1>
-                    <div id="detail-price" style="font-size: 24px; color: var(--primary); font-weight: 800; margin-bottom: 16px;">28.990.000 ₫</div>
-                    <p id="detail-desc" style="color: var(--text-muted); line-height: 1.6; margin-bottom: 24px;">
-                        Mô hình thông số kỹ thuật, hình ảnh minh họa sản phẩm và chính sách bảo hành chính hãng.
-                    </p>
+                    <span class="detail-badge">● Sẵn hàng giao ngay</span>
+                    <h1 class="detail-headline" id="detail-title"></h1>
+                    <div class="detail-cost" id="detail-price"></div>
+                    <p class="detail-text" id="detail-desc"></p>
 
-                    <div style="display: flex; gap: 12px; margin-bottom: 20px;">
-                        <button style="padding: 10px 16px; border: 1px solid var(--border); border-radius: 8px; background: white; font-weight: 600;">Bản Tiêu chuẩn</button>
-                        <button style="padding: 10px 16px; border: 1px solid var(--primary); border-radius: 8px; background: #eff6ff; color: var(--primary); font-weight: 600;">Bản Nâng cao</button>
-                    </div>
+                    <ul class="spec-list">
+                        <li>✓ Cam kết chính hãng 100% - Bảo hành 12 tháng</li>
+                        <li>✓ Miễn phí giao hàng hỏa tốc trong 2 giờ tại Đà Nẵng</li>
+                        <li>✓ Đổi trả linh hoạt trong 30 ngày nếu có lỗi phần cứng</li>
+                    </ul>
 
-                    <button class="btn-primary" onclick="showScreen('screen-cart')">Thêm vào giỏ & Đến màn hình thanh toán →</button>
+                    <button class="btn-action-primary" onclick="proceedCheckout()">Thêm vào giỏ & Chuyển sang thanh toán →</button>
                 </div>
             </div>
         </section>
 
-        <!-- SCREEN 3: CART & CHECKOUT -->
-        <section id="screen-cart" class="screen">
-            <h2 style="margin-bottom: 20px;">Màn hình 3: Giỏ Hàng & Đặt Hàng</h2>
-            <div class="checkout-layout">
-                <div class="box">
-                    <h3 style="margin-bottom: 16px;">Sản phẩm trong giỏ</h3>
-                    <div class="cart-row">
-                        <div style="font-size: 32px; background: #f1f5f9; padding: 12px; border-radius: 8px;">💻</div>
-                        <div style="flex: 1;">
-                            <div style="font-weight: 700;">Laptop Pro 14 inch</div>
-                            <div style="color: var(--text-muted); font-size: 13px;">Bản Nâng cao - Màu Xám</div>
+        <!-- SCREEN 3: CHECKOUT -->
+        <section id="screen-checkout" class="screen">
+            <h2 style="font-size: 20px; font-weight: 800; color: var(--text-heading); margin-bottom: 22px;">Xác Nhận Giỏ Hàng & Thanh Toán</h2>
+
+            <div class="checkout-grid">
+                <!-- Delivery Details Form -->
+                <div class="checkout-box">
+                    <div class="section-header">Sản phẩm trong giỏ</div>
+                    <div class="order-item-row">
+                        <div class="item-thumb-box">
+                            <img id="checkout-thumb" src="" alt="Thumbnail">
                         </div>
-                        <div style="font-weight: 700; color: var(--primary);">28.990.000 ₫</div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 700; color: var(--text-heading);" id="checkout-title"></div>
+                            <div style="color: var(--text-muted); font-size: 13px; margin-top: 4px;">Phiên bản tiêu chuẩn - Bảo hành chính hãng</div>
+                        </div>
+                        <div style="font-weight: 800; color: var(--brand);" id="checkout-price"></div>
                     </div>
 
-                    <h3 style="margin: 24px 0 16px 0;">Thông tin giao hàng</h3>
-                    <div class="form-group">
-                        <label>Họ và tên người nhận</label>
-                        <input type="text" value="Phạm Thị Thùy Trâm" placeholder="Nhập tên">
+                    <div class="section-header" style="margin-top: 26px;">Thông tin nhận hàng</div>
+                    <div class="form-field">
+                        <label>Họ và tên khách hàng</label>
+                        <input type="text" value="Phạm Thị Thùy Trâm">
                     </div>
-                    <div class="form-group">
+                    <div class="form-field">
+                        <label>Số điện thoại</label>
+                        <input type="text" value="0905 123 456">
+                    </div>
+                    <div class="form-field">
                         <label>Địa chỉ nhận hàng</label>
-                        <input type="text" value="Đà Nẵng, Việt Nam" placeholder="Nhập địa chỉ">
+                        <input type="text" value="FPT Complex, Đường Nam Kỳ Khởi Nghĩa, Hòa Hải, Ngũ Hành Sơn, Đà Nẵng">
                     </div>
                 </div>
 
-                <div class="box">
-                    <h3 style="margin-bottom: 16px;">Tóm tắt đơn hàng</h3>
-                    <div class="summary-row">
-                        <span>Tạm tính</span>
-                        <span>28.990.000 ₫</span>
+                <!-- Receipt Summary -->
+                <div class="checkout-box">
+                    <div class="section-header">Chi tiết thanh toán</div>
+                    
+                    <div class="receipt-line">
+                        <span>Giá trị đơn hàng</span>
+                        <span id="subtotal-val" style="font-weight: 600;"></span>
                     </div>
-                    <div class="summary-row">
-                        <span>Phí vận chuyển</span>
-                        <span>Miễn phí</span>
+                    <div class="receipt-line">
+                        <span>Vận chuyển hỏa tốc</span>
+                        <span style="color: var(--success); font-weight: 600;">Miễn phí</span>
                     </div>
-                    <div class="summary-row total">
-                        <span>Tổng thanh toán</span>
-                        <span>28.990.000 ₫</span>
+                    <div class="receipt-line">
+                        <span>Thuế VAT (8%)</span>
+                        <span style="color: var(--text-muted);">Đã bao gồm</span>
                     </div>
 
-                    <button class="btn-primary" onclick="alert('🎉 Đặt hàng thành công! Đã hoàn tất luồng Mockup 3 màn hình.')">Xác nhận thanh toán</button>
+                    <div class="receipt-line receipt-total">
+                        <span>Tổng chi phí</span>
+                        <span id="total-val"></span>
+                    </div>
+
+                    <button class="btn-action-primary" style="margin-top: 24px;" onclick="completeOrder()">Hoàn tất đơn hàng</button>
                 </div>
             </div>
         </section>
     </main>
 
     <script>
-        function showScreen(screenId) {
+        // Real Tech Product Database (8 items with high-res Unsplash links)
+        const products = [
+            {
+                id: 1,
+                name: "MacBook Air 13.6\" M2",
+                category: "laptop",
+                tag: "Bán chạy nhất",
+                price: "24.490.000 ₫",
+                img: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=800&q=80",
+                desc: "Thiết kế vỏ nhôm unibody siêu mỏng nhẹ 1.24kg. Chip Apple M2 với 8-core CPU và 8-core GPU đem lại hiệu năng xử lý đồ họa và văn phòng vượt trội với thời lượng pin 18 giờ."
+            },
+            {
+                id: 2,
+                name: "Sony WH-1000XM5 ANC",
+                category: "audio",
+                tag: "Âm thanh Hi-Res",
+                price: "6.990.000 ₫",
+                img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80",
+                desc: "Khả năng chống ồn chủ động số 1 thị trường với bộ xử lý Integrated Processor V1, 8 micro khử ồn đàm thoại trong trẻo và pin sử dụng bền bỉ 30 giờ."
+            },
+            {
+                id: 3,
+                name: "Bàn phím cơ Keychron Q1 Pro",
+                category: "gear",
+                tag: "Custom Cao cấp",
+                price: "4.350.000 ₫",
+                img: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=800&q=80",
+                desc: "Khung nhôm CNC nguyên khối với thiết kế Double Gasket Mount. Kết nối Bluetooth 5.1 đa thiết bị và hỗ trợ tùy biến layout QMK/VIA mượt mà."
+            },
+            {
+                id: 4,
+                name: "Logitech MX Master 3S",
+                category: "gear",
+                tag: "Công thái học",
+                price: "2.190.000 ₫",
+                img: "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?auto=format&fit=crop&w=800&q=80",
+                desc: "Cảm biến quang học 8.000 DPI lướt nhạy trên mọi mặt phẳng kính. Con lăn cơ học MagSpeed siêu tốc cùng switch click giảm tiếng ồn 90%."
+            },
+            {
+                id: 5,
+                name: "iPad Air 11\" M2 128GB",
+                category: "laptop",
+                tag: "Mới ra mắt",
+                price: "15.990.000 ₫",
+                img: "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&w=800&q=80",
+                desc: "Màn hình Liquid Retina sắc nét với công nghệ True Tone. Sức mạnh đột phá từ vi xử lý M2 hỗ trợ tối ưu các tác vụ ghi chú, vẽ và đa nhiệm văn phòng."
+            },
+            {
+                id: 6,
+                name: "Apple Watch Series 9 GPS",
+                category: "wearable",
+                tag: "Sức khỏe & Thể thao",
+                price: "9.290.000 ₫",
+                img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80",
+                desc: "Chip S9 SiP tiên tiến mang lại cử chỉ chạm hai lần (Double Tap) kỳ diệu. Đo nồng độ oxy trong máu (SpO2), điện tâm đồ ECG và nhận diện va chạm thông minh."
+            },
+            {
+                id: 7,
+                name: "Loa Marshall Stanmore III",
+                category: "audio",
+                tag: "Vintage Retro",
+                price: "8.890.000 ₫",
+                img: "https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&w=800&q=80",
+                desc: "Âm thanh nổi stereo rộng mở mang đậm phong cách rock cổ điển. Hệ thống củ loa hướng ra ngoài giúp âm thanh lan tỏa đều khắp không gian phòng khách."
+            },
+            {
+                id: 8,
+                name: "Sony Alpha A7 IV Body",
+                category: "gear",
+                tag: "Pro Camera",
+                price: "47.990.000 ₫",
+                img: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=800&q=80",
+                desc: "Cảm biến Full-frame Exmor R 33MP cùng khả năng quay video 4K 60p 10-bit 4:2:2. Hệ thống lấy nét tự động theo mắt người và động vật Real-time Eye AF đỉnh cao."
+            }
+        ];
+
+        let selectedProduct = products[0];
+
+        // Render Cards in Catalog
+        function renderCards(items) {
+            const container = document.getElementById('grid-container');
+            container.innerHTML = items.map(p => `
+                <div class="card" onclick="openProduct(${p.id})">
+                    <div class="card-visual">
+                        <span class="tag-pill">${p.tag}</span>
+                        <img src="${p.img}" alt="${p.name}" loading="lazy">
+                    </div>
+                    <div class="card-content">
+                        <div class="card-name">${p.name}</div>
+                        <div class="card-snippet">${p.desc}</div>
+                        <div class="card-footer">
+                            <span class="card-price">${p.price}</span>
+                            <button class="btn-view-spec">Chi tiết →</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Category Filter
+        function filterItems(cat) {
+            document.querySelectorAll('.cat-chip').forEach(c => c.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            if (cat === 'all') {
+                renderCards(products);
+            } else {
+                renderCards(products.filter(p => p.category === cat));
+            }
+        }
+
+        // Screen Navigation
+        function switchStage(screenId) {
             document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.stage-btn').forEach(b => b.classList.remove('active'));
 
             document.getElementById(screenId).classList.add('active');
-            const navBtn = document.getElementById('btn-' + screenId);
-            if (navBtn) navBtn.classList.add('active');
+
+            if (screenId === 'screen-catalog') document.getElementById('tab-catalog').classList.add('active');
+            if (screenId === 'screen-detail') document.getElementById('tab-detail').classList.add('active');
+            if (screenId === 'screen-checkout') document.getElementById('tab-checkout').classList.add('active');
+
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function showDetail(title, price, icon, desc) {
-            document.getElementById('detail-title').innerText = title;
-            document.getElementById('detail-price').innerText = price;
-            document.getElementById('detail-icon').innerText = icon;
-            document.getElementById('detail-desc').innerText = desc;
-            showScreen('screen-detail');
+        // Show Single Product Detail
+        function openProduct(id) {
+            selectedProduct = products.find(p => p.id === id);
+            document.getElementById('detail-title').innerText = selectedProduct.name;
+            document.getElementById('detail-price').innerText = selectedProduct.price;
+            document.getElementById('detail-desc').innerText = selectedProduct.desc;
+            document.getElementById('detail-img').src = selectedProduct.img;
+            switchStage('screen-detail');
         }
+
+        // Pass Data to Checkout
+        function proceedCheckout() {
+            document.getElementById('checkout-title').innerText = selectedProduct.name;
+            document.getElementById('checkout-price').innerText = selectedProduct.price;
+            document.getElementById('checkout-thumb').src = selectedProduct.img;
+            document.getElementById('subtotal-val').innerText = selectedProduct.price;
+            document.getElementById('total-val').innerText = selectedProduct.price;
+            switchStage('screen-checkout');
+        }
+
+        function completeOrder() {
+            alert(`🎉 Cảm ơn Phạm Thị Thùy Trâm!\nĐơn hàng "${selectedProduct.name}" trị giá ${selectedProduct.price} đã được tạo thành công.`);
+        }
+
+        // Initialize First View
+        renderCards(products);
+        openProduct(1);
+        switchStage('screen-catalog');
     </script>
 </body>
 </html>
