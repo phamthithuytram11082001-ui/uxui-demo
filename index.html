@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>AuraTech - Storefront & Merchant Cash Flow</title>
+    <title>AuraTech - E-Commerce Storefront & Merchant Cash Flow Hub</title>
     <!-- Google Font Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,8 +22,11 @@
             --text-body: #475569;
             --text-muted: #94a3b8;
             --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
             --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
             --shadow-md: 0 6px 16px -2px rgba(15,23,42,0.08);
+            --shadow-lg: 0 16px 32px -4px rgba(15,23,42,0.12);
         }
 
         * {
@@ -31,6 +34,7 @@
             margin: 0;
             padding: 0;
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
@@ -42,6 +46,7 @@
             padding-bottom: 70px;
         }
 
+        /* Top Header */
         header {
             background: rgba(255, 255, 255, 0.98);
             border-bottom: 1px solid var(--border);
@@ -62,6 +67,7 @@
             font-weight: 800;
             font-size: 18px;
             color: var(--text-heading);
+            letter-spacing: -0.5px;
         }
 
         .brand-icon {
@@ -75,6 +81,7 @@
             justify-content: center;
         }
 
+        /* Prototype Flow Navigation */
         .stage-nav {
             display: flex;
             background: #f1f5f9;
@@ -137,6 +144,7 @@
             border-radius: 20px;
         }
 
+        /* Mobile Bottom Nav */
         .mobile-bottom-nav {
             display: none;
             position: fixed;
@@ -168,6 +176,7 @@
             color: var(--brand);
         }
 
+        /* Layout Container */
         main {
             max-width: 1200px;
             width: 100%;
@@ -190,31 +199,23 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .hero-banner {
-            background: linear-gradient(135deg, #1e1b4b 0%, #312e81 60%, #4338ca 100%);
-            color: white;
-            padding: 28px;
-            border-radius: 16px;
-            margin-bottom: 20px;
-        }
-
-        .hero-banner h1 { font-size: 22px; font-weight: 800; margin-bottom: 6px; }
-        .hero-banner p { font-size: 13px; color: #c7d2fe; max-width: 560px; line-height: 1.5; }
-
+        /* Filter Chips */
         .filter-scroller {
             display: flex;
             gap: 8px;
-            margin-bottom: 18px;
+            margin-bottom: 20px;
             overflow-x: auto;
             padding-bottom: 4px;
+            scrollbar-width: none;
         }
+        .filter-scroller::-webkit-scrollbar { display: none; }
 
         .chip-btn {
             border: 1px solid var(--border);
             background: var(--surface);
-            padding: 7px 14px;
+            padding: 8px 16px;
             border-radius: 20px;
-            font-size: 12px;
+            font-size: 12.5px;
             font-weight: 600;
             color: var(--text-body);
             cursor: pointer;
@@ -222,6 +223,7 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
+            transition: all 0.2s;
         }
 
         .chip-btn.active {
@@ -230,16 +232,17 @@
             color: var(--brand);
         }
 
+        /* Products Grid */
         .grid-products {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 16px;
+            gap: 18px;
         }
 
         .item-card {
             background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: 12px;
+            border-radius: 14px;
             overflow: hidden;
             display: flex;
             flex-direction: column;
@@ -248,7 +251,7 @@
         }
 
         .item-card:hover {
-            transform: translateY(-3px);
+            transform: translateY(-4px);
             box-shadow: var(--shadow-md);
         }
 
@@ -266,6 +269,11 @@
             height: 100%;
             object-fit: cover;
             display: block;
+            transition: transform 0.3s;
+        }
+
+        .item-card:hover .item-visual img {
+            transform: scale(1.05);
         }
 
         .item-pill {
@@ -275,21 +283,21 @@
             background: rgba(255, 255, 255, 0.95);
             font-size: 10.5px;
             font-weight: 700;
-            padding: 2px 7px;
-            border-radius: 10px;
+            padding: 3px 8px;
+            border-radius: 12px;
             color: var(--text-heading);
             border: 1px solid var(--border);
         }
 
         .item-body {
-            padding: 12px;
+            padding: 14px;
             display: flex;
             flex-direction: column;
             flex: 1;
         }
 
         .item-name {
-            font-size: 14px;
+            font-size: 14.5px;
             font-weight: 700;
             color: var(--text-heading);
             margin-bottom: 4px;
@@ -298,8 +306,8 @@
         .item-snippet {
             font-size: 12px;
             color: var(--text-muted);
-            margin-bottom: 10px;
-            line-height: 1.4;
+            margin-bottom: 12px;
+            line-height: 1.45;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
@@ -314,7 +322,7 @@
         }
 
         .item-price {
-            font-size: 14.5px;
+            font-size: 15px;
             font-weight: 800;
             color: var(--brand);
         }
@@ -323,9 +331,9 @@
             background: var(--brand-light);
             color: var(--brand);
             border: none;
-            padding: 5px 10px;
+            padding: 6px 12px;
             border-radius: 6px;
-            font-size: 11.5px;
+            font-size: 12px;
             font-weight: 700;
             cursor: pointer;
             display: flex;
@@ -333,20 +341,21 @@
             gap: 4px;
         }
 
+        /* Detail Screen */
         .detail-wrapper {
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: 16px;
-            padding: 24px;
+            padding: 30px;
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 28px;
+            gap: 32px;
         }
 
         .detail-gallery {
             width: 100%;
             aspect-ratio: 1/1;
-            max-height: 420px;
+            max-height: 440px;
             border-radius: 12px;
             overflow: hidden;
             border: 1px solid var(--border);
@@ -367,23 +376,25 @@
             font-size: 13px;
             font-weight: 600;
             cursor: pointer;
-            margin-bottom: 14px;
+            margin-bottom: 16px;
             display: inline-flex;
             align-items: center;
             gap: 6px;
         }
 
-        .detail-title { font-size: 20px; font-weight: 800; color: var(--text-heading); margin-bottom: 6px; }
-        .detail-price { font-size: 22px; font-weight: 800; color: var(--brand); margin-bottom: 14px; }
-        .detail-desc { font-size: 13.5px; color: var(--text-body); line-height: 1.6; margin-bottom: 20px; }
+        .back-nav-link:hover { color: var(--brand); }
+
+        .detail-title { font-size: 22px; font-weight: 800; color: var(--text-heading); margin-bottom: 8px; }
+        .detail-price { font-size: 24px; font-weight: 800; color: var(--brand); margin-bottom: 16px; }
+        .detail-desc { font-size: 13.5px; color: var(--text-body); line-height: 1.6; margin-bottom: 22px; }
 
         .btn-submit-action {
             background: var(--brand);
             color: white;
             border: none;
-            padding: 12px 18px;
+            padding: 13px 20px;
             border-radius: 8px;
-            font-size: 13.5px;
+            font-size: 14px;
             font-weight: 700;
             cursor: pointer;
             width: 100%;
@@ -391,81 +402,110 @@
             align-items: center;
             justify-content: center;
             gap: 8px;
+            transition: background 0.2s;
         }
 
+        .btn-submit-action:hover { background: var(--brand-hover); }
+
+        /* Checkout Screen */
         .checkout-container {
             display: grid;
             grid-template-columns: 1.6fr 1fr;
-            gap: 18px;
+            gap: 20px;
         }
 
         .card-box {
             background: var(--surface);
             border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 18px;
+            border-radius: 14px;
+            padding: 22px;
+            box-shadow: var(--shadow-sm);
         }
 
         .checkout-item-row {
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 10px 0;
+            gap: 14px;
+            padding: 12px 0;
             border-bottom: 1px solid var(--border);
         }
 
         .thumb-sq {
-            width: 56px;
-            height: 56px;
+            width: 64px;
+            height: 64px;
             border-radius: 8px;
             overflow: hidden;
             border: 1px solid var(--border);
             flex-shrink: 0;
+            background: #ffffff;
         }
 
-        .thumb-sq img { width: 100%; height: 100%; object-fit: cover; }
+        .thumb-sq img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-        .input-group { margin-bottom: 10px; }
-        .input-group label { display: block; font-size: 11.5px; font-weight: 600; margin-bottom: 4px; color: var(--text-body); }
+        .input-group { margin-bottom: 12px; }
+        .input-group label { display: block; font-size: 12px; font-weight: 600; margin-bottom: 5px; color: var(--text-body); }
         .input-group input {
             width: 100%;
-            padding: 9px 12px;
+            padding: 10px 12px;
             border: 1px solid var(--border);
-            border-radius: 6px;
+            border-radius: 8px;
             font-size: 13px;
             outline: none;
+        }
+
+        /* Screen 4: Seller Cash Flow */
+        .seller-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 12px;
         }
 
         .kpi-row {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 12px;
-            margin-bottom: 20px;
+            gap: 14px;
+            margin-bottom: 22px;
         }
 
         .kpi-tile {
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: 12px;
-            padding: 14px;
+            padding: 16px;
+            box-shadow: var(--shadow-sm);
         }
 
-        .kpi-title { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; }
-        .kpi-num { font-size: 18px; font-weight: 800; color: var(--text-heading); margin: 4px 0; }
-        .kpi-badge { font-size: 10.5px; font-weight: 600; color: var(--success); }
+        .kpi-icon-wrap {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: var(--brand-light);
+            color: var(--brand);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        .kpi-title { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+        .kpi-num { font-size: 20px; font-weight: 800; color: var(--text-heading); margin: 4px 0; }
+        .kpi-badge { font-size: 11px; font-weight: 600; color: var(--success); }
 
         .cashflow-grid {
             display: grid;
             grid-template-columns: 2fr 1fr;
-            gap: 18px;
+            gap: 20px;
         }
 
         .tbl-responsive { width: 100%; overflow-x: auto; }
-        .styled-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
-        .styled-table th { padding: 9px 10px; background: #f8fafc; color: var(--text-muted); font-weight: 600; border-bottom: 1px solid var(--border); text-align: left; }
-        .styled-table td { padding: 10px; border-bottom: 1px solid var(--border); color: var(--text-heading); }
+        .styled-table { width: 100%; border-collapse: collapse; font-size: 12.5px; text-align: left; }
+        .styled-table th { padding: 10px 12px; background: #f8fafc; color: var(--text-muted); font-weight: 600; border-bottom: 1px solid var(--border); }
+        .styled-table td { padding: 12px; border-bottom: 1px solid var(--border); color: var(--text-heading); }
 
-        .badge-tag { padding: 2px 7px; border-radius: 10px; font-size: 10.5px; font-weight: 700; }
+        .badge-tag { padding: 3px 8px; border-radius: 12px; font-size: 11px; font-weight: 700; }
         .badge-settled { background: #dcfce7; color: #15803d; }
         .badge-processing { background: #fef3c7; color: #b45309; }
 
@@ -485,6 +525,7 @@
 </head>
 <body>
 
+    <!-- Header Navigation -->
     <header>
         <div class="brand-container" onclick="switchTab('screen-catalog')">
             <div class="brand-icon"><i data-lucide="zap" style="width: 18px; height: 18px;"></i></div>
@@ -496,13 +537,13 @@
                 <i data-lucide="layout-grid" style="width: 15px; height: 15px;"></i> Catalog
             </button>
             <button class="stage-btn" id="dtab-detail" onclick="switchTab('screen-detail')">
-                <i data-lucide="eye" style="width: 15px; height: 15px;"></i> Chi Tiết
+                <i data-lucide="eye" style="width: 15px; height: 15px;"></i> Product Detail
             </button>
             <button class="stage-btn" id="dtab-checkout" onclick="switchTab('screen-checkout')">
-                <i data-lucide="shopping-bag" style="width: 15px; height: 15px;"></i> Đặt Hàng
+                <i data-lucide="shopping-bag" style="width: 15px; height: 15px;"></i> Checkout
             </button>
             <button class="stage-btn seller-pill" id="dtab-seller" onclick="switchTab('screen-seller')">
-                <i data-lucide="circle-dollar-sign" style="width: 15px; height: 15px;"></i> Dòng Tiền Người Bán
+                <i data-lucide="circle-dollar-sign" style="width: 15px; height: 15px;"></i> Merchant Cash Flow
             </button>
         </nav>
 
@@ -515,17 +556,23 @@
     <main>
         <!-- SCREEN 1: CATALOG -->
         <section id="screen-catalog" class="screen active">
-            <div class="hero-banner">
-                <h1>Flagship Hardware & Storefront</h1>
-                <p>Nền tảng giao diện thương mại điện tử công nghệ cao - Đầy đủ linh hồn sản phẩm và dòng tiền người bán.</p>
-            </div>
-
+            <!-- Filter Chips (Directly shown at the top) -->
             <div class="filter-scroller">
-                <button class="chip-btn active" onclick="applyFilter('all')">Tất cả (8)</button>
-                <button class="chip-btn" onclick="applyFilter('laptop')">Laptops & iPads</button>
-                <button class="chip-btn" onclick="applyFilter('audio')">Tai nghe & Loa</button>
-                <button class="chip-btn" onclick="applyFilter('gear')">Bàn phím & Chuột</button>
-                <button class="chip-btn" onclick="applyFilter('wearable')">Smartwatch</button>
+                <button class="chip-btn active" onclick="applyFilter('all')">
+                    <i data-lucide="layers" style="width: 14px; height: 14px;"></i> All Hardware (8)
+                </button>
+                <button class="chip-btn" onclick="applyFilter('laptop')">
+                    <i data-lucide="laptop" style="width: 14px; height: 14px;"></i> Laptops & Tablets
+                </button>
+                <button class="chip-btn" onclick="applyFilter('audio')">
+                    <i data-lucide="headphones" style="width: 14px; height: 14px;"></i> Audio & Sound
+                </button>
+                <button class="chip-btn" onclick="applyFilter('gear')">
+                    <i data-lucide="mouse" style="width: 14px; height: 14px;"></i> Keyboards & Mice
+                </button>
+                <button class="chip-btn" onclick="applyFilter('wearable')">
+                    <i data-lucide="watch" style="width: 14px; height: 14px;"></i> Smartwatches
+                </button>
             </div>
 
             <div class="grid-products" id="catalog-products-mount"></div>
@@ -534,7 +581,7 @@
         <!-- SCREEN 2: PRODUCT DETAIL -->
         <section id="screen-detail" class="screen">
             <button class="back-nav-link" onclick="switchTab('screen-catalog')">
-                <i data-lucide="arrow-left" style="width: 16px; height: 16px;"></i> Quay lại danh mục
+                <i data-lucide="arrow-left" style="width: 16px; height: 16px;"></i> Back to Catalog
             </button>
             
             <div class="detail-wrapper">
@@ -543,19 +590,20 @@
                 </div>
                 <div>
                     <div style="display:flex; align-items:center; gap:6px; color:var(--success); font-size:12px; font-weight:700; margin-bottom:8px;">
-                        <i data-lucide="check-circle-2" style="width:15px; height:15px;"></i> Sẵn hàng tại kho Đà Nẵng
+                        <i data-lucide="check-circle-2" style="width:15px; height:15px;"></i> In Stock • Ready for Express Delivery
                     </div>
                     <h1 class="detail-title" id="dtl-title"></h1>
                     <div class="detail-price" id="dtl-price"></div>
                     <p class="detail-desc" id="dtl-desc"></p>
 
-                    <div style="background:#f1f5f9; padding:12px; border-radius:8px; margin-bottom:18px; font-size:12px; line-height:1.6;">
-                        <div>• <b>Bảo hành:</b> 12 tháng chính hãng (1 đổi 1 trong 30 ngày)</div>
-                        <div>• <b>Giao hàng:</b> Miễn phí hỏa tốc 2 giờ nội thành Đà Nẵng</div>
+                    <div style="background:#f1f5f9; padding:14px; border-radius:10px; margin-bottom:20px; font-size:12.5px; line-height:1.6;">
+                        <div>• <b>Warranty:</b> 12 Months Official Manufacturer Warranty</div>
+                        <div>• <b>Shipping:</b> Free express delivery within Da Nang (2 hours)</div>
+                        <div>• <b>Returns:</b> 30-day hassle-free replacement policy</div>
                     </div>
 
                     <button class="btn-submit-action" onclick="goToCheckout()">
-                        <i data-lucide="shopping-bag" style="width: 16px; height: 16px;"></i> Thêm vào giỏ & Đến thanh toán
+                        <i data-lucide="shopping-bag" style="width: 16px; height: 16px;"></i> Add to Bag & Proceed to Checkout
                     </button>
                 </div>
             </div>
@@ -563,45 +611,48 @@
 
         <!-- SCREEN 3: CHECKOUT -->
         <section id="screen-checkout" class="screen">
-            <h2 style="font-size: 18px; font-weight: 800; color: var(--text-heading); margin-bottom: 16px;">Xác Nhận Giỏ Hàng & Thanh Toán</h2>
+            <h2 style="font-size: 19px; font-weight: 800; color: var(--text-heading); margin-bottom: 18px;">Review Order & Checkout</h2>
 
             <div class="checkout-container">
                 <div class="card-box">
-                    <div style="font-weight:700; font-size:14px; margin-bottom:10px;">Kiểm tra kiện hàng</div>
+                    <div style="font-weight:700; font-size:15px; margin-bottom:12px;">Order Summary</div>
                     <div class="checkout-item-row">
                         <div class="thumb-sq"><img id="chk-thumb" src="" alt="Product"></div>
                         <div style="flex:1;">
                             <div style="font-weight:700;" id="chk-title"></div>
-                            <div style="color:var(--text-muted); font-size:12px;">Chính hãng nguyên seal</div>
+                            <div style="color:var(--text-muted); font-size:12px;">Brand New Sealed • Official Stock</div>
                         </div>
                         <div style="font-weight:800; color:var(--brand);" id="chk-price"></div>
                     </div>
 
-                    <div style="font-weight:700; font-size:14px; margin:16px 0 10px 0;">Thông tin người mua</div>
+                    <div style="font-weight:700; font-size:15px; margin:20px 0 12px 0;">Customer Information</div>
                     <div class="input-group">
-                        <label>Họ và tên</label>
-                        <input type="text" value="Phạm Thị Thùy Trâm">
+                        <label>Full Name</label>
+                        <input type="text" value="Pham Thi Thuy Tram">
                     </div>
                     <div class="input-group">
-                        <label>Địa chỉ nhận hàng</label>
-                        <input type="text" value="FPT Complex, Nam Kỳ Khởi Nghĩa, Đà Nẵng">
+                        <label>Shipping Address</label>
+                        <input type="text" value="FPT Complex, Nam Ky Khoi Nghia, Da Nang">
                     </div>
                 </div>
 
                 <div class="card-box">
-                    <div style="font-weight:700; font-size:14px; margin-bottom:12px;">Bóc tách chi phí</div>
-                    <div style="display:flex; justify-content:space-between; margin-bottom:8px; font-size:12.5px;">
-                        <span>Giá niêm yết</span><span id="chk-subtotal"></span>
+                    <div style="font-weight:700; font-size:15px; margin-bottom:14px;">Cost Breakdown</div>
+                    <div style="display:flex; justify-content:space-between; margin-bottom:8px; font-size:13px;">
+                        <span>Subtotal</span><span id="chk-subtotal"></span>
                     </div>
-                    <div style="display:flex; justify-content:space-between; margin-bottom:8px; font-size:12.5px;">
-                        <span>Vận chuyển</span><span style="color:var(--success); font-weight:600;">Miễn phí</span>
+                    <div style="display:flex; justify-content:space-between; margin-bottom:8px; font-size:13px;">
+                        <span>Express Delivery</span><span style="color:var(--success); font-weight:600;">Free</span>
                     </div>
-                    <div style="display:flex; justify-content:space-between; font-weight:800; font-size:16px; color:var(--brand); border-top:1px solid var(--border); padding-top:10px; margin-top:8px;">
-                        <span>Tổng thanh toán</span><span id="chk-total"></span>
+                    <div style="display:flex; justify-content:space-between; margin-bottom:8px; font-size:13px;">
+                        <span>Sales Tax (Included)</span><span style="color:var(--text-muted);">$0.00</span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; font-weight:800; font-size:17px; color:var(--brand); border-top:1px solid var(--border); padding-top:12px; margin-top:10px;">
+                        <span>Total Due</span><span id="chk-total"></span>
                     </div>
 
-                    <button class="btn-submit-action" style="margin-top:16px;" onclick="executePurchase()">
-                        <i data-lucide="credit-card" style="width: 16px; height: 16px;"></i> Xác nhận thanh toán
+                    <button class="btn-submit-action" style="margin-top:20px;" onclick="executePurchase()">
+                        <i data-lucide="credit-card" style="width: 16px; height: 16px;"></i> Complete Payment & Trigger Settlement
                     </button>
                 </div>
             </div>
@@ -609,52 +660,73 @@
 
         <!-- SCREEN 4: SELLER DASHBOARD -->
         <section id="screen-seller" class="screen">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; flex-wrap:wrap; gap:10px;">
+            <div class="seller-header">
                 <div>
-                    <h2 style="font-size: 20px; font-weight: 800; color: var(--text-heading);">Bảng Quản Trị Dòng Tiền Người Bán</h2>
-                    <p style="font-size: 12px; color: var(--text-muted);">Theo dõi tiền thực nhận (Net Inflow) và phí sàn đối soát</p>
+                    <h2 style="font-size: 21px; font-weight: 800; color: var(--text-heading);">Merchant Cash Flow & Revenue Hub</h2>
+                    <p style="font-size: 13px; color: var(--text-muted);">Real-time monitoring of Gross vs Net Inflows, platform commission deductions, and automated payout cycles.</p>
                 </div>
-                <button class="btn-submit-action" style="width:auto; padding:8px 14px; font-size:12px; background:#10b981;" onclick="alert('Đã gửi yêu cầu rút tiền về tài khoản ngân hàng!')">
-                    <i data-lucide="arrow-down-to-dot" style="width: 14px; height: 14px;"></i> Rút tiền về ngân hàng
+                <button class="btn-submit-action" style="width:auto; padding:8px 16px; font-size:13px; background:#10b981;" onclick="alert('Payout request initiated! $5,820.00 will be wired to Techcombank **** 8899 within 24 business hours.')">
+                    <i data-lucide="arrow-down-to-dot" style="width: 15px; height: 15px;"></i> Request Bank Payout
                 </button>
             </div>
 
+            <!-- KPI Row -->
             <div class="kpi-row">
                 <div class="kpi-tile">
-                    <div class="kpi-title">Số dư khả dụng</div>
-                    <div class="kpi-num">142.850.000 ₫</div>
-                    <div class="kpi-badge">Sẵn sàng rút ngay</div>
+                    <div class="kpi-icon-wrap" style="background:#ecfdf5; color:#10b981;">
+                        <i data-lucide="wallet" style="width: 18px; height: 18px;"></i>
+                    </div>
+                    <div class="kpi-title">Available for Payout</div>
+                    <div class="kpi-num">$5,820.00</div>
+                    <div class="kpi-badge">Ready to withdraw</div>
                 </div>
+
                 <div class="kpi-tile">
-                    <div class="kpi-title">Doanh số (Gross)</div>
-                    <div class="kpi-num">168.450.000 ₫</div>
-                    <div class="kpi-badge">↑ 14.8% tuần này</div>
+                    <div class="kpi-icon-wrap" style="background:#eef2ff; color:#4f46e5;">
+                        <i data-lucide="trending-up" style="width: 18px; height: 18px;"></i>
+                    </div>
+                    <div class="kpi-title">Gross Revenue (GMV)</div>
+                    <div class="kpi-num">$6,850.00</div>
+                    <div class="kpi-badge">↑ 14.8% vs last week</div>
                 </div>
+
                 <div class="kpi-tile">
-                    <div class="kpi-title">Tiền chờ đối soát</div>
-                    <div class="kpi-num">25.600.000 ₫</div>
-                    <div class="kpi-badge" style="color:#d97706;">Chu kỳ T+3</div>
+                    <div class="kpi-icon-wrap" style="background:#fef3c7; color:#d97706;">
+                        <i data-lucide="clock" style="width: 18px; height: 18px;"></i>
+                    </div>
+                    <div class="kpi-title">Pending Settlement</div>
+                    <div class="kpi-num">$1,030.00</div>
+                    <div class="kpi-badge" style="color:#d97706;">T+3 Rolling Schedule</div>
                 </div>
+
                 <div class="kpi-tile">
-                    <div class="kpi-title">Phí sàn & Thuế (8%)</div>
-                    <div class="kpi-num">13.476.000 ₫</div>
-                    <div class="kpi-badge" style="color:var(--text-muted);">Đã trừ trực tiếp</div>
+                    <div class="kpi-icon-wrap" style="background:#fee2e2; color:#ef4444;">
+                        <i data-lucide="receipt" style="width: 18px; height: 18px;"></i>
+                    </div>
+                    <div class="kpi-title">Platform Fee (8%)</div>
+                    <div class="kpi-num">$548.00</div>
+                    <div class="kpi-badge" style="color:var(--text-muted);">Includes gateway fees</div>
                 </div>
             </div>
 
+            <!-- Cash Flow Table -->
             <div class="cashflow-grid">
                 <div class="card-box">
-                    <div style="font-weight:700; font-size:14px; margin-bottom:12px;">Lịch sử dòng tiền giao dịch</div>
+                    <div style="font-weight:700; font-size:15px; margin-bottom:14px; display:flex; justify-content:space-between; align-items:center;">
+                        <span>Transaction Ledger & Inflows</span>
+                        <span style="font-size:12px; color:var(--text-muted);">Real-time ledger</span>
+                    </div>
+
                     <div class="tbl-responsive">
                         <table class="styled-table">
                             <thead>
                                 <tr>
-                                    <th>Mã GD</th>
-                                    <th>Thời gian</th>
-                                    <th>Thiết bị bán</th>
-                                    <th>Gross</th>
-                                    <th>Net nhận</th>
-                                    <th>Trạng thái</th>
+                                    <th>Transaction ID</th>
+                                    <th>Timestamp</th>
+                                    <th>Item Sold</th>
+                                    <th>Gross (GMV)</th>
+                                    <th>Net Payout</th>
+                                    <th>Settlement Status</th>
                                 </tr>
                             </thead>
                             <tbody id="settlement-tbody"></tbody>
@@ -663,59 +735,64 @@
                 </div>
 
                 <div class="card-box">
-                    <div style="font-weight:700; font-size:14px; margin-bottom:12px;">Tài khoản nhận tiền</div>
-                    <div style="font-size:12.5px; line-height:1.6; color:var(--text-body);">
-                        <div>• Ngân hàng: <b>Techcombank</b></div>
-                        <div>• STK: <b>**** 8899</b></div>
-                        <div>• Chủ TK: <b>PHAM THI THUY TRAM</b></div>
-                        <div>• Chu kỳ giải ngân: <b>Thứ Năm hàng tuần</b></div>
+                    <div style="font-weight:700; font-size:15px; margin-bottom:14px;">Settlement Details</div>
+                    <div style="font-size:13px; line-height:1.7; color:var(--text-body); margin-bottom:16px;">
+                        <div>• <b>Payout Account:</b> Techcombank **** 8899</div>
+                        <div>• <b>Account Holder:</b> PHAM THI THUY TRAM</div>
+                        <div>• <b>Standard Cycle:</b> Weekly Every Thursday</div>
+                        <div>• <b>Commission Rate:</b> Flat 8% per transaction</div>
+                    </div>
+                    <div style="background:#f8fafc; border:1px solid var(--border); border-radius:10px; padding:12px; font-size:12px; color:var(--text-muted); line-height:1.5;">
+                        <i data-lucide="info" style="width:14px; height:14px; vertical-align:middle; color:var(--brand); margin-right:4px;"></i>
+                        Orders placed by customers in Screen 3 are instantly mapped as <b>"Pending"</b> with exact net deductions before transitioning to cleared funds.
                     </div>
                 </div>
             </div>
         </section>
     </main>
 
+    <!-- Mobile Bottom Navigation Bar -->
     <nav class="mobile-bottom-nav">
         <button class="mob-nav-item active" id="mtab-catalog" onclick="switchTab('screen-catalog')">
             <i data-lucide="layout-grid" style="width: 20px; height: 20px;"></i>
-            <span>Cửa hàng</span>
+            <span>Catalog</span>
         </button>
         <button class="mob-nav-item" id="mtab-detail" onclick="switchTab('screen-detail')">
             <i data-lucide="eye" style="width: 20px; height: 20px;"></i>
-            <span>Chi tiết</span>
+            <span>Detail</span>
         </button>
         <button class="mob-nav-item" id="mtab-checkout" onclick="switchTab('screen-checkout')">
             <i data-lucide="shopping-cart" style="width: 20px; height: 20px;"></i>
-            <span>Giỏ hàng</span>
+            <span>Cart</span>
         </button>
         <button class="mob-nav-item" id="mtab-seller" onclick="switchTab('screen-seller')">
             <i data-lucide="circle-dollar-sign" style="width: 20px; height: 20px;"></i>
-            <span>Dòng tiền</span>
+            <span>Cash Flow</span>
         </button>
     </nav>
 
     <script>
         const products = [
-            { id: 1, name: "MacBook Air 13.6\" M2", category: "laptop", tag: "Bán chạy nhất", priceText: "24.490.000 ₫", rawPrice: 24490000, img: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=800&q=80", desc: "Vỏ nhôm mỏng nhẹ 1.24kg, vi xử lý M2 mạnh mẽ, pin 18 tiếng liên tục." },
-            { id: 2, name: "Sony WH-1000XM5 ANC", category: "audio", tag: "Hi-Res Audio", priceText: "6.990.000 ₫", rawPrice: 6990000, img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80", desc: "Chống ồn chủ động đỉnh cao số 1 thế giới với bộ xử lý Integrated Processor V1, pin 30 giờ." },
-            { id: 3, name: "Bàn phím cơ Keychron Q1 Pro", category: "gear", tag: "Custom Cao cấp", priceText: "4.350.000 ₫", rawPrice: 4350000, img: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=800&q=80", desc: "Khung nhôm CNC nguyên khối, gasket mount kép, Bluetooth 5.1 đa thiết bị." },
-            { id: 4, name: "Logitech MX Master 3S", category: "gear", tag: "Công thái học", priceText: "2.190.000 ₫", rawPrice: 2190000, img: "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?auto=format&fit=crop&w=800&q=80", desc: "Cảm biến 8.000 DPI trên mặt kính, con lăn điện từ MagSpeed siêu nhanh." },
-            { id: 5, name: "iPad Air 11\" M2 128GB", category: "laptop", tag: "Mới ra mắt", priceText: "15.990.000 ₫", rawPrice: 15990000, img: "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&w=800&q=80", desc: "Màn hình Liquid Retina công nghệ True Tone, hỗ trợ Apple Pencil Pro thiết kế." },
-            { id: 6, name: "Apple Watch Series 9 GPS", category: "wearable", tag: "Sức khỏe", priceText: "9.290.000 ₫", rawPrice: 9290000, img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80", desc: "Chip S9 SiP tiên tiến, thao tác chạm hai lần Double Tap, đo oxy máu SpO2." },
-            { id: 7, name: "Loa Marshall Stanmore III", category: "audio", tag: "Vintage Retro", priceText: "8.890.000 ₫", rawPrice: 8890000, img: "https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&w=800&q=80", desc: "Chất âm stereo cổ điển lan tỏa khắp căn phòng, kết nối Bluetooth 5.2." },
-            { id: 8, name: "Sony Alpha A7 IV Body", category: "gear", tag: "Pro Camera", priceText: "47.990.000 ₫", rawPrice: 47990000, img: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=800&q=80", desc: "Cảm biến Full-frame 33MP, lấy nét mắt Real-time AF, quay video 4K 60p chuyên nghiệp." }
+            { id: 1, name: "Apple MacBook Air 13.6\" M2", category: "laptop", tag: "Best Seller", priceText: "$999.00", rawPrice: 999, img: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=800&q=80", desc: "Ultra-thin 1.24kg unibody design. Powered by Apple M2 chip with 8-core CPU and 18-hour all-day battery life." },
+            { id: 2, name: "Sony WH-1000XM5 Wireless ANC", category: "audio", tag: "Hi-Res Audio", priceText: "$399.00", rawPrice: 399, img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80", desc: "Industry-leading noise cancellation engineered with Integrated Processor V1, 8 beamforming mics, and 30-hour battery life." },
+            { id: 3, name: "Keychron Q1 Pro Wireless Custom", category: "gear", tag: "Mechanical", priceText: "$199.00", rawPrice: 199, img: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=800&q=80", desc: "Full CNC aluminum body, double-gasket acoustic mounting, and wireless Bluetooth 5.1 multi-device connectivity." },
+            { id: 4, name: "Logitech MX Master 3S Ergonomic", category: "gear", tag: "Ergonomics", priceText: "$99.00", rawPrice: 99, img: "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?auto=format&fit=crop&w=800&q=80", desc: "8,000 DPI track-on-glass optical sensor with ultra-fast MagSpeed electromagnetic scrolling and quiet clicks." },
+            { id: 5, name: "iPad Air 11\" M2 128GB", category: "laptop", tag: "New Arrival", priceText: "$599.00", rawPrice: 599, img: "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&w=800&q=80", desc: "Brilliant Liquid Retina display with True Tone, powered by M2 for effortless multitasking and Apple Pencil Pro support." },
+            { id: 6, name: "Apple Watch Series 9 GPS", category: "wearable", tag: "Fitness & Health", priceText: "$399.00", rawPrice: 399, img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80", desc: "Advanced S9 SiP processor, magical Double Tap gesture, and comprehensive ECG & blood oxygen wellness tracking." },
+            { id: 7, name: "Marshall Stanmore III Bluetooth", category: "audio", tag: "Classic Retro", priceText: "$379.00", rawPrice: 379, img: "https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&w=800&q=80", desc: "Expansive stereophonic stage filling room acoustics, iconic vintage enclosure, and next-gen Bluetooth 5.2." },
+            { id: 8, name: "Sony Alpha A7 IV Full-Frame Body", category: "gear", tag: "Pro Creator", priceText: "$2,499.00", rawPrice: 2499, img: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=800&q=80", desc: "33MP back-illuminated Exmor R sensor, 4K 60p 10-bit recording, and Real-time Eye AF for professional creators." }
         ];
 
         let cashflowData = [
-            { txId: "TX-9982", time: "Hôm nay, 08:30", item: "MacBook Air 13.6\" M2", gross: 24490000, net: 22530800, status: "processing" },
-            { txId: "TX-9980", time: "Hôm qua, 16:45", item: "Sony WH-1000XM5", gross: 6990000, net: 6430800, status: "settled" },
-            { txId: "TX-9978", time: "07/11/2026", item: "Keychron Q1 Pro", gross: 4350000, net: 4002000, status: "settled" }
+            { txId: "TX-9982", time: "Today, 08:30 AM", item: "Apple MacBook Air 13.6\" M2", gross: 999, net: 919.08, status: "processing" },
+            { txId: "TX-9980", time: "Yesterday, 04:45 PM", item: "Sony WH-1000XM5 ANC", gross: 399, net: 367.08, status: "settled" },
+            { txId: "TX-9978", time: "Nov 07, 2026", item: "Keychron Q1 Pro Wireless", gross: 199, net: 183.08, status: "settled" }
         ];
 
         let activeProduct = products[0];
 
-        function formatVND(n) {
-            return new Intl.NumberFormat('vi-VN').format(n) + ' ₫';
+        function formatUSD(num) {
+            return '$' + num.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
         }
 
         function renderCatalog(items) {
@@ -731,7 +808,7 @@
                         <div class="item-snippet">${p.desc}</div>
                         <div class="item-foot">
                             <span class="item-price">${p.priceText}</span>
-                            <button class="btn-view-product">Chi tiết →</button>
+                            <button class="btn-view-product">Details →</button>
                         </div>
                     </div>
                 </div>
@@ -741,8 +818,16 @@
 
         function applyFilter(cat) {
             document.querySelectorAll('.chip-btn').forEach(c => c.classList.remove('active'));
-            event.target.classList.add('active');
+            event.target.closest('.chip-btn').classList.add('active');
             renderCatalog(cat === 'all' ? products : products.filter(p => p.category === cat));
+        }
+
+        function updateCheckoutData() {
+            document.getElementById('chk-title').innerText = activeProduct.name;
+            document.getElementById('chk-price').innerText = activeProduct.priceText;
+            document.getElementById('chk-thumb').src = activeProduct.img;
+            document.getElementById('chk-subtotal').innerText = activeProduct.priceText;
+            document.getElementById('chk-total').innerText = activeProduct.priceText;
         }
 
         function switchTab(screenId) {
@@ -761,6 +846,7 @@
             } else if (screenId === 'screen-checkout') {
                 document.getElementById('dtab-checkout')?.classList.add('active');
                 document.getElementById('mtab-checkout')?.classList.add('active');
+                updateCheckoutData();
             } else if (screenId === 'screen-seller') {
                 document.getElementById('dtab-seller')?.classList.add('active');
                 document.getElementById('mtab-seller')?.classList.add('active');
@@ -777,32 +863,29 @@
             document.getElementById('dtl-price').innerText = activeProduct.priceText;
             document.getElementById('dtl-desc').innerText = activeProduct.desc;
             document.getElementById('dtl-img').src = activeProduct.img;
+            updateCheckoutData();
             switchTab('screen-detail');
         }
 
         function goToCheckout() {
-            document.getElementById('chk-title').innerText = activeProduct.name;
-            document.getElementById('chk-price').innerText = activeProduct.priceText;
-            document.getElementById('chk-thumb').src = activeProduct.img;
-            document.getElementById('chk-subtotal').innerText = activeProduct.priceText;
-            document.getElementById('chk-total').innerText = activeProduct.priceText;
+            updateCheckoutData();
             switchTab('screen-checkout');
         }
 
         function executePurchase() {
             const txId = "TX-" + Math.floor(1000 + Math.random() * 9000);
-            const netAmount = Math.round(activeProduct.rawPrice * 0.92);
+            const netAmount = +(activeProduct.rawPrice * 0.92).toFixed(2);
 
             cashflowData.unshift({
                 txId: txId,
-                time: "Vừa xong",
+                time: "Just now",
                 item: activeProduct.name,
                 gross: activeProduct.rawPrice,
                 net: netAmount,
                 status: "processing"
             });
 
-            alert(`🎉 Đặt hàng thành công!\nMã đơn: ${txId}\nHệ thống đã đồng bộ sang Màn hình Dòng tiền Người bán.`);
+            alert(`🎉 Order Placed Successfully!\nTransaction ID: ${txId}\nOrder data has been automatically routed to the Merchant Cash Flow Ledger.`);
             switchTab('screen-seller');
         }
 
@@ -813,11 +896,11 @@
                     <td style="font-weight:700;">${c.txId}</td>
                     <td style="color:var(--text-muted); font-size:11px;">${c.time}</td>
                     <td>${c.item}</td>
-                    <td style="font-weight:600;">${formatVND(c.gross)}</td>
-                    <td style="font-weight:800; color:#10b981;">+${formatVND(c.net)}</td>
+                    <td style="font-weight:600;">${formatUSD(c.gross)}</td>
+                    <td style="font-weight:800; color:#10b981;">+${formatUSD(c.net)}</td>
                     <td>
                         <span class="badge-tag ${c.status === 'settled' ? 'badge-settled' : 'badge-processing'}">
-                            ${c.status === 'settled' ? 'Đã giải ngân' : 'Chờ T+3'}
+                            ${c.status === 'settled' ? 'Settled (Cleared)' : 'Pending (T+3)'}
                         </span>
                     </td>
                 </tr>
@@ -825,10 +908,11 @@
             if (window.lucide) lucide.createIcons();
         }
 
-        // Run on load
+        // Initialize on DOM ready
         window.addEventListener('DOMContentLoaded', () => {
             renderCatalog(products);
             viewDetail(1);
+            updateCheckoutData();
             switchTab('screen-catalog');
         });
     </script>
