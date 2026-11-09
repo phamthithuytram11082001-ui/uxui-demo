@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>AuraTech - Flagship E-Commerce & Merchant Cash Flow Hub</title>
+    <title>AuraTech - Storefront & Merchant Cash Flow</title>
     <!-- Google Font Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,11 +22,8 @@
             --text-body: #475569;
             --text-muted: #94a3b8;
             --success: #10b981;
-            --warning: #f59e0b;
-            --danger: #ef4444;
             --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
             --shadow-md: 0 6px 16px -2px rgba(15,23,42,0.08);
-            --shadow-lg: 0 16px 32px -4px rgba(15,23,42,0.12);
         }
 
         * {
@@ -34,7 +31,6 @@
             margin: 0;
             padding: 0;
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            -webkit-tap-highlight-color: transparent;
         }
 
         body {
@@ -43,13 +39,11 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            padding-bottom: 60px; /* Space for mobile bottom bar */
+            padding-bottom: 70px;
         }
 
-        /* Top Header */
         header {
-            background: rgba(255, 255, 255, 0.96);
-            backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.98);
             border-bottom: 1px solid var(--border);
             padding: 12px 24px;
             display: flex;
@@ -68,7 +62,6 @@
             font-weight: 800;
             font-size: 18px;
             color: var(--text-heading);
-            letter-spacing: -0.5px;
         }
 
         .brand-icon {
@@ -82,7 +75,6 @@
             justify-content: center;
         }
 
-        /* Desktop Flow Switcher */
         .stage-nav {
             display: flex;
             background: #f1f5f9;
@@ -145,14 +137,13 @@
             border-radius: 20px;
         }
 
-        /* Mobile Bottom App Navigation */
         .mobile-bottom-nav {
             display: none;
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
-            background: rgba(255, 255, 255, 0.98);
+            background: #ffffff;
             border-top: 1px solid var(--border);
             padding: 6px 12px;
             z-index: 1000;
@@ -177,7 +168,6 @@
             color: var(--brand);
         }
 
-        /* Container */
         main {
             max-width: 1200px;
             width: 100%;
@@ -188,7 +178,7 @@
 
         .screen {
             display: none;
-            animation: fadeIn 0.25s ease-out;
+            animation: fadeIn 0.2s ease-out;
         }
 
         .screen.active {
@@ -196,31 +186,651 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(6px); }
+            from { opacity: 0; transform: translateY(4px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Hero */
         .hero-banner {
             background: linear-gradient(135deg, #1e1b4b 0%, #312e81 60%, #4338ca 100%);
             color: white;
-            padding: 30px;
-            border-radius: 18px;
-            margin-bottom: 22px;
-            position: relative;
-            overflow: hidden;
+            padding: 28px;
+            border-radius: 16px;
+            margin-bottom: 20px;
         }
 
-        .hero-banner h1 { font-size: 24px; font-weight: 800; margin-bottom: 6px; }
-        .hero-banner p { font-size: 13.5px; color: #c7d2fe; max-width: 560px; line-height: 1.5; }
+        .hero-banner h1 { font-size: 22px; font-weight: 800; margin-bottom: 6px; }
+        .hero-banner p { font-size: 13px; color: #c7d2fe; max-width: 560px; line-height: 1.5; }
 
-        /* Category Chips */
         .filter-scroller {
             display: flex;
             gap: 8px;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
             overflow-x: auto;
             padding-bottom: 4px;
-            scrollbar-width: none;
         }
-        .filter-scroller::-webkit-scrollbar { display
+
+        .chip-btn {
+            border: 1px solid var(--border);
+            background: var(--surface);
+            padding: 7px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-body);
+            cursor: pointer;
+            white-space: nowrap;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .chip-btn.active {
+            background: var(--brand-light);
+            border-color: var(--brand);
+            color: var(--brand);
+        }
+
+        .grid-products {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 16px;
+        }
+
+        .item-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .item-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .item-visual {
+            width: 100%;
+            aspect-ratio: 4/3;
+            background: #ffffff;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .item-visual img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .item-pill {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            background: rgba(255, 255, 255, 0.95);
+            font-size: 10.5px;
+            font-weight: 700;
+            padding: 2px 7px;
+            border-radius: 10px;
+            color: var(--text-heading);
+            border: 1px solid var(--border);
+        }
+
+        .item-body {
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .item-name {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-heading);
+            margin-bottom: 4px;
+        }
+
+        .item-snippet {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .item-foot {
+            margin-top: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .item-price {
+            font-size: 14.5px;
+            font-weight: 800;
+            color: var(--brand);
+        }
+
+        .btn-view-product {
+            background: var(--brand-light);
+            color: var(--brand);
+            border: none;
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-size: 11.5px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .detail-wrapper {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 28px;
+        }
+
+        .detail-gallery {
+            width: 100%;
+            aspect-ratio: 1/1;
+            max-height: 420px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            background: #fff;
+        }
+
+        .detail-gallery img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .back-nav-link {
+            background: none;
+            border: none;
+            color: var(--text-body);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .detail-title { font-size: 20px; font-weight: 800; color: var(--text-heading); margin-bottom: 6px; }
+        .detail-price { font-size: 22px; font-weight: 800; color: var(--brand); margin-bottom: 14px; }
+        .detail-desc { font-size: 13.5px; color: var(--text-body); line-height: 1.6; margin-bottom: 20px; }
+
+        .btn-submit-action {
+            background: var(--brand);
+            color: white;
+            border: none;
+            padding: 12px 18px;
+            border-radius: 8px;
+            font-size: 13.5px;
+            font-weight: 700;
+            cursor: pointer;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .checkout-container {
+            display: grid;
+            grid-template-columns: 1.6fr 1fr;
+            gap: 18px;
+        }
+
+        .card-box {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 18px;
+        }
+
+        .checkout-item-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .thumb-sq {
+            width: 56px;
+            height: 56px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            flex-shrink: 0;
+        }
+
+        .thumb-sq img { width: 100%; height: 100%; object-fit: cover; }
+
+        .input-group { margin-bottom: 10px; }
+        .input-group label { display: block; font-size: 11.5px; font-weight: 600; margin-bottom: 4px; color: var(--text-body); }
+        .input-group input {
+            width: 100%;
+            padding: 9px 12px;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 13px;
+            outline: none;
+        }
+
+        .kpi-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .kpi-tile {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 14px;
+        }
+
+        .kpi-title { font-size: 11px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; }
+        .kpi-num { font-size: 18px; font-weight: 800; color: var(--text-heading); margin: 4px 0; }
+        .kpi-badge { font-size: 10.5px; font-weight: 600; color: var(--success); }
+
+        .cashflow-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 18px;
+        }
+
+        .tbl-responsive { width: 100%; overflow-x: auto; }
+        .styled-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+        .styled-table th { padding: 9px 10px; background: #f8fafc; color: var(--text-muted); font-weight: 600; border-bottom: 1px solid var(--border); text-align: left; }
+        .styled-table td { padding: 10px; border-bottom: 1px solid var(--border); color: var(--text-heading); }
+
+        .badge-tag { padding: 2px 7px; border-radius: 10px; font-size: 10.5px; font-weight: 700; }
+        .badge-settled { background: #dcfce7; color: #15803d; }
+        .badge-processing { background: #fef3c7; color: #b45309; }
+
+        @media (max-width: 820px) {
+            header .stage-nav { display: none; }
+            .mobile-bottom-nav { display: flex; }
+            .grid-products { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+            .detail-wrapper, .checkout-container, .cashflow-grid { grid-template-columns: 1fr; }
+            .kpi-row { grid-template-columns: repeat(2, 1fr); }
+            .item-visual { aspect-ratio: 1/1; }
+        }
+
+        @media (max-width: 480px) {
+            .grid-products { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="brand-container" onclick="switchTab('screen-catalog')">
+            <div class="brand-icon"><i data-lucide="zap" style="width: 18px; height: 18px;"></i></div>
+            <span>AuraTech Hub</span>
+        </div>
+
+        <nav class="stage-nav">
+            <button class="stage-btn active" id="dtab-catalog" onclick="switchTab('screen-catalog')">
+                <i data-lucide="layout-grid" style="width: 15px; height: 15px;"></i> Catalog
+            </button>
+            <button class="stage-btn" id="dtab-detail" onclick="switchTab('screen-detail')">
+                <i data-lucide="eye" style="width: 15px; height: 15px;"></i> Chi Tiết
+            </button>
+            <button class="stage-btn" id="dtab-checkout" onclick="switchTab('screen-checkout')">
+                <i data-lucide="shopping-bag" style="width: 15px; height: 15px;"></i> Đặt Hàng
+            </button>
+            <button class="stage-btn seller-pill" id="dtab-seller" onclick="switchTab('screen-seller')">
+                <i data-lucide="circle-dollar-sign" style="width: 15px; height: 15px;"></i> Dòng Tiền Người Bán
+            </button>
+        </nav>
+
+        <button class="cart-trigger-btn" onclick="switchTab('screen-checkout')">
+            <i data-lucide="shopping-cart" style="width: 16px; height: 16px;"></i>
+            <span class="cart-badge" id="cart-badge-count">1</span>
+        </button>
+    </header>
+
+    <main>
+        <!-- SCREEN 1: CATALOG -->
+        <section id="screen-catalog" class="screen active">
+            <div class="hero-banner">
+                <h1>Flagship Hardware & Storefront</h1>
+                <p>Nền tảng giao diện thương mại điện tử công nghệ cao - Đầy đủ linh hồn sản phẩm và dòng tiền người bán.</p>
+            </div>
+
+            <div class="filter-scroller">
+                <button class="chip-btn active" onclick="applyFilter('all')">Tất cả (8)</button>
+                <button class="chip-btn" onclick="applyFilter('laptop')">Laptops & iPads</button>
+                <button class="chip-btn" onclick="applyFilter('audio')">Tai nghe & Loa</button>
+                <button class="chip-btn" onclick="applyFilter('gear')">Bàn phím & Chuột</button>
+                <button class="chip-btn" onclick="applyFilter('wearable')">Smartwatch</button>
+            </div>
+
+            <div class="grid-products" id="catalog-products-mount"></div>
+        </section>
+
+        <!-- SCREEN 2: PRODUCT DETAIL -->
+        <section id="screen-detail" class="screen">
+            <button class="back-nav-link" onclick="switchTab('screen-catalog')">
+                <i data-lucide="arrow-left" style="width: 16px; height: 16px;"></i> Quay lại danh mục
+            </button>
+            
+            <div class="detail-wrapper">
+                <div class="detail-gallery">
+                    <img id="dtl-img" src="" alt="Product Detail">
+                </div>
+                <div>
+                    <div style="display:flex; align-items:center; gap:6px; color:var(--success); font-size:12px; font-weight:700; margin-bottom:8px;">
+                        <i data-lucide="check-circle-2" style="width:15px; height:15px;"></i> Sẵn hàng tại kho Đà Nẵng
+                    </div>
+                    <h1 class="detail-title" id="dtl-title"></h1>
+                    <div class="detail-price" id="dtl-price"></div>
+                    <p class="detail-desc" id="dtl-desc"></p>
+
+                    <div style="background:#f1f5f9; padding:12px; border-radius:8px; margin-bottom:18px; font-size:12px; line-height:1.6;">
+                        <div>• <b>Bảo hành:</b> 12 tháng chính hãng (1 đổi 1 trong 30 ngày)</div>
+                        <div>• <b>Giao hàng:</b> Miễn phí hỏa tốc 2 giờ nội thành Đà Nẵng</div>
+                    </div>
+
+                    <button class="btn-submit-action" onclick="goToCheckout()">
+                        <i data-lucide="shopping-bag" style="width: 16px; height: 16px;"></i> Thêm vào giỏ & Đến thanh toán
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SCREEN 3: CHECKOUT -->
+        <section id="screen-checkout" class="screen">
+            <h2 style="font-size: 18px; font-weight: 800; color: var(--text-heading); margin-bottom: 16px;">Xác Nhận Giỏ Hàng & Thanh Toán</h2>
+
+            <div class="checkout-container">
+                <div class="card-box">
+                    <div style="font-weight:700; font-size:14px; margin-bottom:10px;">Kiểm tra kiện hàng</div>
+                    <div class="checkout-item-row">
+                        <div class="thumb-sq"><img id="chk-thumb" src="" alt="Product"></div>
+                        <div style="flex:1;">
+                            <div style="font-weight:700;" id="chk-title"></div>
+                            <div style="color:var(--text-muted); font-size:12px;">Chính hãng nguyên seal</div>
+                        </div>
+                        <div style="font-weight:800; color:var(--brand);" id="chk-price"></div>
+                    </div>
+
+                    <div style="font-weight:700; font-size:14px; margin:16px 0 10px 0;">Thông tin người mua</div>
+                    <div class="input-group">
+                        <label>Họ và tên</label>
+                        <input type="text" value="Phạm Thị Thùy Trâm">
+                    </div>
+                    <div class="input-group">
+                        <label>Địa chỉ nhận hàng</label>
+                        <input type="text" value="FPT Complex, Nam Kỳ Khởi Nghĩa, Đà Nẵng">
+                    </div>
+                </div>
+
+                <div class="card-box">
+                    <div style="font-weight:700; font-size:14px; margin-bottom:12px;">Bóc tách chi phí</div>
+                    <div style="display:flex; justify-content:space-between; margin-bottom:8px; font-size:12.5px;">
+                        <span>Giá niêm yết</span><span id="chk-subtotal"></span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; margin-bottom:8px; font-size:12.5px;">
+                        <span>Vận chuyển</span><span style="color:var(--success); font-weight:600;">Miễn phí</span>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; font-weight:800; font-size:16px; color:var(--brand); border-top:1px solid var(--border); padding-top:10px; margin-top:8px;">
+                        <span>Tổng thanh toán</span><span id="chk-total"></span>
+                    </div>
+
+                    <button class="btn-submit-action" style="margin-top:16px;" onclick="executePurchase()">
+                        <i data-lucide="credit-card" style="width: 16px; height: 16px;"></i> Xác nhận thanh toán
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- SCREEN 4: SELLER DASHBOARD -->
+        <section id="screen-seller" class="screen">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; flex-wrap:wrap; gap:10px;">
+                <div>
+                    <h2 style="font-size: 20px; font-weight: 800; color: var(--text-heading);">Bảng Quản Trị Dòng Tiền Người Bán</h2>
+                    <p style="font-size: 12px; color: var(--text-muted);">Theo dõi tiền thực nhận (Net Inflow) và phí sàn đối soát</p>
+                </div>
+                <button class="btn-submit-action" style="width:auto; padding:8px 14px; font-size:12px; background:#10b981;" onclick="alert('Đã gửi yêu cầu rút tiền về tài khoản ngân hàng!')">
+                    <i data-lucide="arrow-down-to-dot" style="width: 14px; height: 14px;"></i> Rút tiền về ngân hàng
+                </button>
+            </div>
+
+            <div class="kpi-row">
+                <div class="kpi-tile">
+                    <div class="kpi-title">Số dư khả dụng</div>
+                    <div class="kpi-num">142.850.000 ₫</div>
+                    <div class="kpi-badge">Sẵn sàng rút ngay</div>
+                </div>
+                <div class="kpi-tile">
+                    <div class="kpi-title">Doanh số (Gross)</div>
+                    <div class="kpi-num">168.450.000 ₫</div>
+                    <div class="kpi-badge">↑ 14.8% tuần này</div>
+                </div>
+                <div class="kpi-tile">
+                    <div class="kpi-title">Tiền chờ đối soát</div>
+                    <div class="kpi-num">25.600.000 ₫</div>
+                    <div class="kpi-badge" style="color:#d97706;">Chu kỳ T+3</div>
+                </div>
+                <div class="kpi-tile">
+                    <div class="kpi-title">Phí sàn & Thuế (8%)</div>
+                    <div class="kpi-num">13.476.000 ₫</div>
+                    <div class="kpi-badge" style="color:var(--text-muted);">Đã trừ trực tiếp</div>
+                </div>
+            </div>
+
+            <div class="cashflow-grid">
+                <div class="card-box">
+                    <div style="font-weight:700; font-size:14px; margin-bottom:12px;">Lịch sử dòng tiền giao dịch</div>
+                    <div class="tbl-responsive">
+                        <table class="styled-table">
+                            <thead>
+                                <tr>
+                                    <th>Mã GD</th>
+                                    <th>Thời gian</th>
+                                    <th>Thiết bị bán</th>
+                                    <th>Gross</th>
+                                    <th>Net nhận</th>
+                                    <th>Trạng thái</th>
+                                </tr>
+                            </thead>
+                            <tbody id="settlement-tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card-box">
+                    <div style="font-weight:700; font-size:14px; margin-bottom:12px;">Tài khoản nhận tiền</div>
+                    <div style="font-size:12.5px; line-height:1.6; color:var(--text-body);">
+                        <div>• Ngân hàng: <b>Techcombank</b></div>
+                        <div>• STK: <b>**** 8899</b></div>
+                        <div>• Chủ TK: <b>PHAM THI THUY TRAM</b></div>
+                        <div>• Chu kỳ giải ngân: <b>Thứ Năm hàng tuần</b></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <nav class="mobile-bottom-nav">
+        <button class="mob-nav-item active" id="mtab-catalog" onclick="switchTab('screen-catalog')">
+            <i data-lucide="layout-grid" style="width: 20px; height: 20px;"></i>
+            <span>Cửa hàng</span>
+        </button>
+        <button class="mob-nav-item" id="mtab-detail" onclick="switchTab('screen-detail')">
+            <i data-lucide="eye" style="width: 20px; height: 20px;"></i>
+            <span>Chi tiết</span>
+        </button>
+        <button class="mob-nav-item" id="mtab-checkout" onclick="switchTab('screen-checkout')">
+            <i data-lucide="shopping-cart" style="width: 20px; height: 20px;"></i>
+            <span>Giỏ hàng</span>
+        </button>
+        <button class="mob-nav-item" id="mtab-seller" onclick="switchTab('screen-seller')">
+            <i data-lucide="circle-dollar-sign" style="width: 20px; height: 20px;"></i>
+            <span>Dòng tiền</span>
+        </button>
+    </nav>
+
+    <script>
+        const products = [
+            { id: 1, name: "MacBook Air 13.6\" M2", category: "laptop", tag: "Bán chạy nhất", priceText: "24.490.000 ₫", rawPrice: 24490000, img: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=800&q=80", desc: "Vỏ nhôm mỏng nhẹ 1.24kg, vi xử lý M2 mạnh mẽ, pin 18 tiếng liên tục." },
+            { id: 2, name: "Sony WH-1000XM5 ANC", category: "audio", tag: "Hi-Res Audio", priceText: "6.990.000 ₫", rawPrice: 6990000, img: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=80", desc: "Chống ồn chủ động đỉnh cao số 1 thế giới với bộ xử lý Integrated Processor V1, pin 30 giờ." },
+            { id: 3, name: "Bàn phím cơ Keychron Q1 Pro", category: "gear", tag: "Custom Cao cấp", priceText: "4.350.000 ₫", rawPrice: 4350000, img: "https://images.unsplash.com/photo-1587829741301-dc798b83add3?auto=format&fit=crop&w=800&q=80", desc: "Khung nhôm CNC nguyên khối, gasket mount kép, Bluetooth 5.1 đa thiết bị." },
+            { id: 4, name: "Logitech MX Master 3S", category: "gear", tag: "Công thái học", priceText: "2.190.000 ₫", rawPrice: 2190000, img: "https://images.unsplash.com/photo-1615663245857-ac93bb7c39e7?auto=format&fit=crop&w=800&q=80", desc: "Cảm biến 8.000 DPI trên mặt kính, con lăn điện từ MagSpeed siêu nhanh." },
+            { id: 5, name: "iPad Air 11\" M2 128GB", category: "laptop", tag: "Mới ra mắt", priceText: "15.990.000 ₫", rawPrice: 15990000, img: "https://images.unsplash.com/photo-1544244015-0df4b3ffc6b0?auto=format&fit=crop&w=800&q=80", desc: "Màn hình Liquid Retina công nghệ True Tone, hỗ trợ Apple Pencil Pro thiết kế." },
+            { id: 6, name: "Apple Watch Series 9 GPS", category: "wearable", tag: "Sức khỏe", priceText: "9.290.000 ₫", rawPrice: 9290000, img: "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=800&q=80", desc: "Chip S9 SiP tiên tiến, thao tác chạm hai lần Double Tap, đo oxy máu SpO2." },
+            { id: 7, name: "Loa Marshall Stanmore III", category: "audio", tag: "Vintage Retro", priceText: "8.890.000 ₫", rawPrice: 8890000, img: "https://images.unsplash.com/photo-1545454675-3531b543be5d?auto=format&fit=crop&w=800&q=80", desc: "Chất âm stereo cổ điển lan tỏa khắp căn phòng, kết nối Bluetooth 5.2." },
+            { id: 8, name: "Sony Alpha A7 IV Body", category: "gear", tag: "Pro Camera", priceText: "47.990.000 ₫", rawPrice: 47990000, img: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=800&q=80", desc: "Cảm biến Full-frame 33MP, lấy nét mắt Real-time AF, quay video 4K 60p chuyên nghiệp." }
+        ];
+
+        let cashflowData = [
+            { txId: "TX-9982", time: "Hôm nay, 08:30", item: "MacBook Air 13.6\" M2", gross: 24490000, net: 22530800, status: "processing" },
+            { txId: "TX-9980", time: "Hôm qua, 16:45", item: "Sony WH-1000XM5", gross: 6990000, net: 6430800, status: "settled" },
+            { txId: "TX-9978", time: "07/11/2026", item: "Keychron Q1 Pro", gross: 4350000, net: 4002000, status: "settled" }
+        ];
+
+        let activeProduct = products[0];
+
+        function formatVND(n) {
+            return new Intl.NumberFormat('vi-VN').format(n) + ' ₫';
+        }
+
+        function renderCatalog(items) {
+            const mount = document.getElementById('catalog-products-mount');
+            mount.innerHTML = items.map(p => `
+                <div class="item-card" onclick="viewDetail(${p.id})">
+                    <div class="item-visual">
+                        <span class="item-pill">${p.tag}</span>
+                        <img src="${p.img}" alt="${p.name}">
+                    </div>
+                    <div class="item-body">
+                        <div class="item-name">${p.name}</div>
+                        <div class="item-snippet">${p.desc}</div>
+                        <div class="item-foot">
+                            <span class="item-price">${p.priceText}</span>
+                            <button class="btn-view-product">Chi tiết →</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            if (window.lucide) lucide.createIcons();
+        }
+
+        function applyFilter(cat) {
+            document.querySelectorAll('.chip-btn').forEach(c => c.classList.remove('active'));
+            event.target.classList.add('active');
+            renderCatalog(cat === 'all' ? products : products.filter(p => p.category === cat));
+        }
+
+        function switchTab(screenId) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.stage-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.mob-nav-item').forEach(b => b.classList.remove('active'));
+
+            document.getElementById(screenId).classList.add('active');
+
+            if (screenId === 'screen-catalog') {
+                document.getElementById('dtab-catalog')?.classList.add('active');
+                document.getElementById('mtab-catalog')?.classList.add('active');
+            } else if (screenId === 'screen-detail') {
+                document.getElementById('dtab-detail')?.classList.add('active');
+                document.getElementById('mtab-detail')?.classList.add('active');
+            } else if (screenId === 'screen-checkout') {
+                document.getElementById('dtab-checkout')?.classList.add('active');
+                document.getElementById('mtab-checkout')?.classList.add('active');
+            } else if (screenId === 'screen-seller') {
+                document.getElementById('dtab-seller')?.classList.add('active');
+                document.getElementById('mtab-seller')?.classList.add('active');
+                renderCashflowTable();
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            if (window.lucide) lucide.createIcons();
+        }
+
+        function viewDetail(id) {
+            activeProduct = products.find(p => p.id === id);
+            document.getElementById('dtl-title').innerText = activeProduct.name;
+            document.getElementById('dtl-price').innerText = activeProduct.priceText;
+            document.getElementById('dtl-desc').innerText = activeProduct.desc;
+            document.getElementById('dtl-img').src = activeProduct.img;
+            switchTab('screen-detail');
+        }
+
+        function goToCheckout() {
+            document.getElementById('chk-title').innerText = activeProduct.name;
+            document.getElementById('chk-price').innerText = activeProduct.priceText;
+            document.getElementById('chk-thumb').src = activeProduct.img;
+            document.getElementById('chk-subtotal').innerText = activeProduct.priceText;
+            document.getElementById('chk-total').innerText = activeProduct.priceText;
+            switchTab('screen-checkout');
+        }
+
+        function executePurchase() {
+            const txId = "TX-" + Math.floor(1000 + Math.random() * 9000);
+            const netAmount = Math.round(activeProduct.rawPrice * 0.92);
+
+            cashflowData.unshift({
+                txId: txId,
+                time: "Vừa xong",
+                item: activeProduct.name,
+                gross: activeProduct.rawPrice,
+                net: netAmount,
+                status: "processing"
+            });
+
+            alert(`🎉 Đặt hàng thành công!\nMã đơn: ${txId}\nHệ thống đã đồng bộ sang Màn hình Dòng tiền Người bán.`);
+            switchTab('screen-seller');
+        }
+
+        function renderCashflowTable() {
+            const tbody = document.getElementById('settlement-tbody');
+            tbody.innerHTML = cashflowData.map(c => `
+                <tr>
+                    <td style="font-weight:700;">${c.txId}</td>
+                    <td style="color:var(--text-muted); font-size:11px;">${c.time}</td>
+                    <td>${c.item}</td>
+                    <td style="font-weight:600;">${formatVND(c.gross)}</td>
+                    <td style="font-weight:800; color:#10b981;">+${formatVND(c.net)}</td>
+                    <td>
+                        <span class="badge-tag ${c.status === 'settled' ? 'badge-settled' : 'badge-processing'}">
+                            ${c.status === 'settled' ? 'Đã giải ngân' : 'Chờ T+3'}
+                        </span>
+                    </td>
+                </tr>
+            `).join('');
+            if (window.lucide) lucide.createIcons();
+        }
+
+        // Run on load
+        window.addEventListener('DOMContentLoaded', () => {
+            renderCatalog(products);
+            viewDetail(1);
+            switchTab('screen-catalog');
+        });
+    </script>
+</body>
+</html>
